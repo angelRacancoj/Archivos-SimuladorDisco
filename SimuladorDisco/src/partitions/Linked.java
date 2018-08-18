@@ -2,19 +2,21 @@ package partitions;
 
 import Objects.Block;
 import Objects.Directory;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author teodoro
+ * @author teodoroD
  */
 public class Linked {
+    private int DiskSize;
     private List<Directory> directory;
     private List<Block> blocks;
-
-    public Linked(List<Directory> directory, List<Block> blocks) {
-        this.directory = directory;
-        this.blocks = blocks;
+    
+    public Linked(int DiskSize) {
+        this.DiskSize=DiskSize;
+        this.directory = new ArrayList<>();
     }
 
     public List<Directory> getDirectory() {
