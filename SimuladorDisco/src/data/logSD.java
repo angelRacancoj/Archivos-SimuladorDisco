@@ -10,8 +10,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 /**
  *
@@ -38,13 +36,52 @@ public class logSD {
             System.out.println("Already exist info.log");
         } else {
             fichero = new FileWriter(file);
-            fichero.write("Date: " + new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(Calendar.getInstance().getTime()) + "\n");
+            fichero.write("Date: " + constants.actualDateTime() + "\n");
             fichero.close();
         }
     }
 
-    public void addPartitionInfo() {
+    /**
+     * This method must be use only for "Asignacion Contigua" this method
+     * include the way is saved the information
+     *
+     * @param dateTime
+     * @param idPartition
+     * @param idOperacion
+     * @param ajuste
+     * @param nameOfFile
+     * @throws IOException
+     */
+    public void addOperationInfo(String dateTime, String idPartition, String idOperacion, String ajuste, String nameOfFile) throws IOException {
+        addToLog(dateTime + "\t" + idPartition + "\t" + idOperacion + "\t" + ajuste + "\t" + nameOfFile);
+    }
 
+    /**
+     * This method must be use for "Asignacion Enlazada e Indexada" just for
+     * this methods
+     *
+     * @param dateTime
+     * @param idParticion
+     * @param idOperacion
+     * @param nameOfFile
+     * @throws IOException
+     */
+    public void addOperationInfo(String dateTime, String idParticion, String idOperacion, String nameOfFile) throws IOException {
+        addToLog(dateTime + "\t" + idParticion + "\t" + idOperacion + "\t" + nameOfFile);
+    }
+
+    /**
+     * include the partition information to include at the log
+     *
+     * the size need to be in Mb
+     *
+     * @param dateTime
+     * @param idPartition
+     * @param size
+     * @throws IOException
+     */
+    public void addPatitionInfo(String dateTime, String idPartition, int size) throws IOException {
+        addToLog(dateTime + "\t" + idPartition + "\t" + size);
     }
 
     private void addToLog(String lineToAdd) throws IOException {
