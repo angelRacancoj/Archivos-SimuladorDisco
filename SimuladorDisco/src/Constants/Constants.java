@@ -15,4 +15,6 @@ public class Constants {
     public final int PARTICION_CONTIGUA = 2;
     public final int PARTICION_ENLAZADA = 3;
 
+    public final String LOG_PATH = "info.log";
+
 }
