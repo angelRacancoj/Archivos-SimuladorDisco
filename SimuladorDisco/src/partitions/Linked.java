@@ -21,6 +21,7 @@ public class Linked {
         this.DiskSize = DiskSize * 1024 * 1024;
         this.directory = new ArrayList<>();
         this.blocks = new ArrayList<>();
+        createBlocks(15);
     }
 
     public List<Directory> getDirectory() {
@@ -59,8 +60,8 @@ public class Linked {
         } else {
             if (isEmpty(index)) {
                 blocks.get(index).setData(null);
-                blocks.get(index).setPuntero(index);
-                return insertFile(index(), size-1);
+                blocks.get(index).setPuntero(insertFile(index(), size-1));
+                return index;
                 //blocke Vacio
             } else {
                 return insertFile(index(), size);
@@ -68,10 +69,11 @@ public class Linked {
         }
     }
 
-    private void insert(int file, int size) {
+    public void insert(int size,int idFile) {
         boolean repeat = true;
         int position = index();
         if (space(size)) {
+            directory.add(new Directory(idFile, position));
             while (repeat) {
                 if (isEmpty(position)) {
                     blocks.get(position).setData(null);
