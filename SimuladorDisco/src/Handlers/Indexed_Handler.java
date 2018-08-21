@@ -263,8 +263,8 @@ public class Indexed_Handler {
             throw new ExistenceException("No Existe el Archivo");
         } 
         return "Archivo: " + id + "\n"+ 
-                "Tamaño real del archivo: " + checkActualFileSize(id) + "\n"+ 
-                "Tamaño en Disco del Archivo: " + checkFileSizeOnDisk(id);
+                "Tamaño real del archivo: " + checkActualFileSize(id) + "Kb\n"+ 
+                "Tamaño en Disco del Archivo: " + checkFileSizeOnDisk(id) + "Kb";
         
     }
     
