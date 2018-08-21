@@ -278,17 +278,20 @@
                 <Property name="text" type="java.lang.String" value="Particion 2"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem19">
+                <MenuItem class="javax.swing.JMenuItem" name="reporteDirectorioMenuItem">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Reporte de directorio"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reporteDirectorioMenuItemActionPerformed"/>
+                  </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem20">
+                <MenuItem class="javax.swing.JMenuItem" name="reporteBloquesMenuItem">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Reporte de bloques"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem20ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reporteBloquesMenuItemActionPerformed"/>
                   </Events>
                 </MenuItem>
               </SubComponents>

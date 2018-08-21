@@ -5,11 +5,16 @@
  */
 package GUI.frontend.pantallas;
 
+import Constants.Constants;
 import GUI.backend.MetodosInterfaz;
+import GUI.frontend.PrincipalFrame;
+import errores.InputsVaciosException;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,10 +26,18 @@ public class CrearArchivoFrame extends javax.swing.JFrame {
      * Creates new form crearFrame
      */
     MetodosInterfaz metodosInterfaz;
-    JFrame frame;
+    PrincipalFrame frame;
+    int partition;
 
-    public CrearArchivoFrame(JFrame frame) {
-
+    /**
+     * This method use need its father to get the partition objects, and the
+     * partition index to save by the correct method
+     *
+     * @param frame
+     * @param partition
+     */
+    public CrearArchivoFrame(PrincipalFrame frame, int partition) {
+        this.partition = partition;
         metodosInterfaz = new MetodosInterfaz();
         initComponents();
         this.frame = frame;
@@ -116,10 +129,25 @@ public class CrearArchivoFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            metodosInterfaz.Guardar(nombreFormattedTextField.getText(), textoTextArea.getText());
+
+            File newFile = metodosInterfaz.Guardar(nombreFormattedTextField.getText(), textoTextArea.getText());
+            switch (partition) {
+                case 1:
+                    break;
+                case 2:
+                    frame.getLinkedP().insert(newFile);
+                    break;
+                case 3:
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "\nOpcion de disco Incorrecta. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
+                    break;
+            }
+
             this.setVisible(false);
             frame.setVisible(true);
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "\nError al guardar el archivo. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
             System.out.println("en guardar el archivo");
         }
     }//GEN-LAST:event_jButton1ActionPerformed

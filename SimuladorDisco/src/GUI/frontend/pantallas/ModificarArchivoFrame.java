@@ -6,8 +6,11 @@
 package GUI.frontend.pantallas;
 
 import GUI.backend.MetodosInterfaz;
+import GUI.frontend.PrincipalFrame;
+import java.io.File;
 import java.io.IOException;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,10 +21,12 @@ public class ModificarArchivoFrame extends javax.swing.JFrame {
     /**
      * Creates new form ModificarArchivoFrame
      */
-    JFrame frame;
+    PrincipalFrame frame;
+    int partition;
     MetodosInterfaz metodosInterfaz;
 
-    public ModificarArchivoFrame(JFrame frame) {
+    public ModificarArchivoFrame(PrincipalFrame frame, int partition) {
+        this.partition = partition;
         initComponents();
         this.frame = frame;
         metodosInterfaz = new MetodosInterfaz();
@@ -41,9 +46,9 @@ public class ModificarArchivoFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         textoTextArea = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        saveChangesButton = new javax.swing.JButton();
         cancelarButton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        findFileButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Modificar Archivo");
@@ -58,10 +63,10 @@ public class ModificarArchivoFrame extends javax.swing.JFrame {
         textoTextArea.setRows(5);
         jScrollPane1.setViewportView(textoTextArea);
 
-        jButton1.setText("Guardar Cambios");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        saveChangesButton.setText("Guardar Cambios");
+        saveChangesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                saveChangesButtonActionPerformed(evt);
             }
         });
 
@@ -72,10 +77,10 @@ public class ModificarArchivoFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Buscar Archivo");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        findFileButton.setText("Buscar Archivo");
+        findFileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                findFileButtonActionPerformed(evt);
             }
         });
 
@@ -91,12 +96,12 @@ public class ModificarArchivoFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(nombreFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
-                        .addComponent(jButton2))
+                        .addComponent(findFileButton))
                     .addComponent(jLabel2))
                 .addContainerGap(124, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(78, 78, 78)
-                .addComponent(jButton1)
+                .addComponent(saveChangesButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
                 .addComponent(cancelarButton)
                 .addGap(142, 142, 142))
@@ -109,14 +114,14 @@ public class ModificarArchivoFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nombreFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(findFileButton))
                 .addGap(36, 36, 36)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(saveChangesButton)
                     .addComponent(cancelarButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -124,16 +129,30 @@ public class ModificarArchivoFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void saveChangesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesButtonActionPerformed
         try {
-            metodosInterfaz.Guardar(nombreFormattedTextField.getText(), textoTextArea.getText());
+            File newFile = metodosInterfaz.Guardar(nombreFormattedTextField.getText(), textoTextArea.getText());
+
+            switch (partition) {
+                case 1:
+                    break;
+                case 2:
+                    frame.getLinkedP().modifyFile(newFile);
+                    break;
+                case 3:
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "\nOpcion de disco Incorrecta. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
+                    break;
+            }
             this.setVisible(false);
             frame.setVisible(true);
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "\nError al guardar el archivo. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
             System.out.println("en guardar el archivo");
 
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_saveChangesButtonActionPerformed
 
     private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
         // TODO add your handling code here:
@@ -141,18 +160,18 @@ public class ModificarArchivoFrame extends javax.swing.JFrame {
         frame.setVisible(true);
     }//GEN-LAST:event_cancelarButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void findFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findFileButtonActionPerformed
         textoTextArea.setText(metodosInterfaz.AbrirBin());
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_findFileButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelarButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton findFileButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JFormattedTextField nombreFormattedTextField;
+    private javax.swing.JButton saveChangesButton;
     private javax.swing.JTextArea textoTextArea;
     // End of variables declaration//GEN-END:variables
 }

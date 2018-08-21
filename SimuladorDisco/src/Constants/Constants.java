@@ -16,9 +16,9 @@ public class Constants {
 
     private final String DateTimeFormat = "dd-MM-yyyy HH:mm:ss";
 
-    public final int PARTICION_INDEXADA = 1;
-    public final int PARTICION_CONTIGUA = 2;
-    public final int PARTICION_ENLAZADA = 3;
+    public final int PARTICION_INDEXADA = 3;
+    public final int PARTICION_CONTIGUA = 1;
+    public final int PARTICION_ENLAZADA = 2;
 
     public final String LOG_PATH = "info.log";
 

@@ -1,6 +1,5 @@
 package partitions;
 
-import Objects.Block;
 import Objects.BlockLinked;
 import Objects.Directory;
 import java.io.File;
@@ -18,13 +17,20 @@ public class Linked {
     private List<BlockLinked> blocks;
 
     //como parametro el tamano de la particion en MB
-    public Linked(int DiskSize,int sizeBlocks) {
+    /**
+     * When the partition is created this needs the partition size in Mb and the
+     * size block must be in Kb
+     *
+     * @param DiskSize (Mb)
+     * @param sizeBlocks (Kb)
+     */
+    public Linked(int DiskSize, int sizeBlocks) {
         //conversion de MB a Kb
         this.DiskSize = DiskSize * 1024;
         this.directory = new ArrayList<>();
         this.blocks = new ArrayList<>();
         //crear los bloques
-        createBlocks(this.DiskSize,sizeBlocks);
+        createBlocks(this.DiskSize, sizeBlocks);
     }
 
     public List<Directory> getDirectory() {
@@ -34,7 +40,8 @@ public class Linked {
     public void setDirectory(List<Directory> directory) {
         this.directory = directory;
     }
-    public void formatDisk(){
+
+    public void formatDisk() {
         for (int i = 0; i < blocks.size(); i++) {
             blocks.set(i, new BlockLinked(i, null, 0));
         }
@@ -48,7 +55,7 @@ public class Linked {
         this.blocks = blocks;
     }
 
-    private void createBlocks(int size,int sizeBlocks) {
+    private void createBlocks(int size, int sizeBlocks) {
         int quantity = size / sizeBlocks;
         for (int i = 0; i < quantity; i++) {
             this.blocks.add(new BlockLinked(i, null, 0));
@@ -80,6 +87,7 @@ public class Linked {
     }
 
     /**
+     * This method need the file to add into de partition
      *
      * @param file
      */
@@ -124,6 +132,13 @@ public class Linked {
         }
     }
 
+    /**
+     * Return the file that had been saved at this partition, need the position
+     * or code of the file
+     *
+     * @param id
+     * @return
+     */
     public File getFile(int id) {
         Directory file = dataExist(id);
         if (file != null) {
@@ -133,18 +148,25 @@ public class Linked {
             return null;
         }
     }
-    private void resetBlock(BlockLinked block){
-        blocks.set(block.getId(),new BlockLinked(block.getId(), null, 0));
+
+    private void resetBlock(BlockLinked block) {
+        blocks.set(block.getId(), new BlockLinked(block.getId(), null, 0));
     }
-    private void delete(int puntero){
-        if(puntero!=-1){
+
+    private void delete(int puntero) {
+        if (puntero != -1) {
             delete(blocks.get(puntero).getPuntero());
             resetBlock(blocks.get(puntero));
-        }else{
+        } else {
             resetBlock(blocks.get(puntero));
         }
     }
 
+    /**
+     * To delete a file it needs the code or position of the file
+     *
+     * @param id
+     */
     public void deleteFile(int id) {
         Directory file = dataExist(id);
         if (file != null) {
@@ -155,15 +177,28 @@ public class Linked {
         }
     }
 
+    /**
+     * This method require for the file that is going to be replace by itself
+     * modify version
+     *
+     * @param file
+     */
     public void modifyFile(File file) {
         if (dataExist(Integer.parseInt(file.getName())) != null) {
             deleteFile(Integer.parseInt(file.getName()));
-            insert(file); 
+            insert(file);
         } else {
             //no existe el archivo
         }
     }
 
+    /**
+     * This method return the number of blocks that the file required to be
+     * stored at the partition
+     *
+     * @param idFile
+     * @return
+     */
     public int getSizeData(int idFile) {
         int val;
         if (dataExist(idFile) != null) {

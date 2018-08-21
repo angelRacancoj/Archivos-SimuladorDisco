@@ -5,6 +5,7 @@
  */
 package GUI.frontend.pantallas;
 
+import GUI.frontend.PrincipalFrame;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -17,9 +18,18 @@ public class EliminarArchivoFrame extends javax.swing.JFrame {
     /**
      * Creates new form EliminarArchivoFrame
      */
-    JFrame frame;
+    PrincipalFrame frame;
+    int partition;
 
-    public EliminarArchivoFrame(JFrame frame) {
+    /**
+     * This method use need its father to get the partition objects, and the
+     * partition index to save by the correct method
+     *
+     * @param frame
+     * @param partition
+     */
+    public EliminarArchivoFrame(PrincipalFrame frame, int partition) {
+        this.partition = partition;
         initComponents();
         this.frame = frame;
     }
@@ -93,6 +103,19 @@ public class EliminarArchivoFrame extends javax.swing.JFrame {
 
     private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
         if (!idArchivoEliminarTextField.getText().isEmpty()) {
+
+            switch (partition) {
+                case 1:
+                    break;
+                case 2:
+                    frame.getLinkedP().deleteFile(Integer.getInteger(idArchivoEliminarTextField.getText()));
+                    break;
+                case 3:
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "\nOpcion de disco Incorrecta. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
+                    break;
+            }
             JOptionPane.showMessageDialog(null, "\nEl archivo se a eliminado correctamente. ", "ADVERTENCIA!!!", JOptionPane.INFORMATION_MESSAGE);
             this.setVisible(false);
             frame.setVisible(true);

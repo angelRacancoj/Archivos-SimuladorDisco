@@ -7,6 +7,7 @@ package GUI.frontend;
 
 import GUI.backend.MetodosInterfaz;
 import javax.swing.JOptionPane;
+import partitions.Linked;
 
 /**
  *
@@ -21,6 +22,8 @@ public class InicioFrame extends javax.swing.JFrame {
     int pixelesParticion1 = 0;
     int pixelesParticion2 = 0;
     int pixelesParticion3 = 0;
+//    int p2 = 0;
+    Linked linkedP;
 
     public InicioFrame() {
         initComponents();
@@ -84,7 +87,7 @@ public class InicioFrame extends javax.swing.JFrame {
                         .addComponent(diskSizeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(410, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,7 +146,7 @@ public class InicioFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(particion1TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(particion1Slider, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel9)
@@ -202,7 +205,7 @@ public class InicioFrame extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
+                .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -211,7 +214,7 @@ public class InicioFrame extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(particion2Slider, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel11)
@@ -279,7 +282,7 @@ public class InicioFrame extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(particion3Slider, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -349,8 +352,12 @@ public class InicioFrame extends javax.swing.JFrame {
         if (!nombreDiscoTextField.getText().isEmpty() && (int) diskSizeSpinner.getValue() > 0 && (int) bloqueP1SizeSpinner.getValue() > 0
                 && (int) bloqueP2SizeSpinner.getValue() > 0 && (int) bloqueP3SizeSpinner.getValue() > 0) {
 
-            PrincipalFrame frame = new PrincipalFrame(Integer.parseInt(particion1TextField.getText()), Integer.parseInt(
-                    particion2TextField.getText()), Integer.parseInt(particion3TextField.getText()), (int) diskSizeSpinner.getValue());
+//            p2 = (int) ((Double.parseDouble(particion2TextField.getText()) / 100) * ((int) diskSizeSpinner.getValue()));
+            linkedP = new Linked((int) ((Double.parseDouble(particion2TextField.getText()) / 100)
+                    * ((int) diskSizeSpinner.getValue())), (int) bloqueP2SizeSpinner.getValue());
+
+            PrincipalFrame frame = new PrincipalFrame(Integer.parseInt(particion1TextField.getText()), Integer.parseInt(particion2TextField.getText()),
+                    Integer.parseInt(particion3TextField.getText()), (int) diskSizeSpinner.getValue(), linkedP);
             JOptionPane.showMessageDialog(null, "\nDisco montado correctamente. ", "ADVERTENCIA!!!", JOptionPane.INFORMATION_MESSAGE);
 
             frame.setVisible(true);

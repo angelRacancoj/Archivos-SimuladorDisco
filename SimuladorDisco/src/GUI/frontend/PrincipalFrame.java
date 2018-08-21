@@ -5,12 +5,15 @@
  */
 package GUI.frontend;
 
+import Constants.Constants;
 import GUI.backend.MetodosInterfaz;
 import GUI.frontend.pantallas.ConsultarArchivoFrame;
 import GUI.frontend.pantallas.CrearArchivoFrame;
 import GUI.frontend.pantallas.EliminarArchivoFrame;
 import GUI.frontend.pantallas.ModificarArchivoFrame;
+import java.io.File;
 import javax.swing.JOptionPane;
+import partitions.Linked;
 
 /**
  *
@@ -27,8 +30,10 @@ public class PrincipalFrame extends javax.swing.JFrame {
     int particion2Porcenaje;
     int particion3Porcenaje;
     int memoria;
+    Linked linkedP;
+    Constants constantSD = new Constants();
 
-    public PrincipalFrame(int particion1Porcenaje, int particion2Porcenaje, int particion3Porcenaje, int memoria) {
+    public PrincipalFrame(int particion1Porcenaje, int particion2Porcenaje, int particion3Porcenaje, int memoria, Linked linkedP) {
 
         this.metodosInterfaz = new MetodosInterfaz();
         this.particion1Porcenaje = particion1Porcenaje;
@@ -93,8 +98,8 @@ public class PrincipalFrame extends javax.swing.JFrame {
         jMenuItem17 = new javax.swing.JMenuItem();
         jMenuItem18 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
-        jMenuItem19 = new javax.swing.JMenuItem();
-        jMenuItem20 = new javax.swing.JMenuItem();
+        reporteDirectorioMenuItem = new javax.swing.JMenuItem();
+        reporteBloquesMenuItem = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
         jMenuItem21 = new javax.swing.JMenuItem();
         jMenuItem22 = new javax.swing.JMenuItem();
@@ -357,16 +362,21 @@ public class PrincipalFrame extends javax.swing.JFrame {
 
         jMenu8.setText("Particion 2");
 
-        jMenuItem19.setText("Reporte de directorio");
-        jMenu8.add(jMenuItem19);
-
-        jMenuItem20.setText("Reporte de bloques");
-        jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
+        reporteDirectorioMenuItem.setText("Reporte de directorio");
+        reporteDirectorioMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem20ActionPerformed(evt);
+                reporteDirectorioMenuItemActionPerformed(evt);
             }
         });
-        jMenu8.add(jMenuItem20);
+        jMenu8.add(reporteDirectorioMenuItem);
+
+        reporteBloquesMenuItem.setText("Reporte de bloques");
+        reporteBloquesMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reporteBloquesMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu8.add(reporteBloquesMenuItem);
 
         jMenu7.add(jMenu8);
 
@@ -473,14 +483,14 @@ public class PrincipalFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void modificarP1MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarP1MenuItemActionPerformed
-        ModificarArchivoFrame archivoFrame = new ModificarArchivoFrame(this);
+        ModificarArchivoFrame archivoFrame = new ModificarArchivoFrame(this, constantSD.PARTICION_CONTIGUA);
         archivoFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_modificarP1MenuItemActionPerformed
 
-    private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
+    private void reporteBloquesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteBloquesMenuItemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem20ActionPerformed
+    }//GEN-LAST:event_reporteBloquesMenuItemActionPerformed
 
     private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
         // TODO add your handling code here:
@@ -508,49 +518,49 @@ public class PrincipalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_peorAjusteMenuItemActionPerformed
 
     private void crearP1MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearP1MenuItemActionPerformed
-        CrearArchivoFrame archivoInternalFrame = new CrearArchivoFrame(this);
+        CrearArchivoFrame archivoInternalFrame = new CrearArchivoFrame(this, constantSD.PARTICION_CONTIGUA);
         archivoInternalFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_crearP1MenuItemActionPerformed
 
     private void eliminarP1MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarP1MenuItemActionPerformed
-        EliminarArchivoFrame eliminarArchivoFrame = new EliminarArchivoFrame(this);
+        EliminarArchivoFrame eliminarArchivoFrame = new EliminarArchivoFrame(this, constantSD.PARTICION_CONTIGUA);
         eliminarArchivoFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_eliminarP1MenuItemActionPerformed
 
     private void crearP2MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearP2MenuItemActionPerformed
-        CrearArchivoFrame archivoInternalFrame = new CrearArchivoFrame(this);
+        CrearArchivoFrame archivoInternalFrame = new CrearArchivoFrame(this, constantSD.PARTICION_ENLAZADA);
         archivoInternalFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_crearP2MenuItemActionPerformed
 
     private void crearP3MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearP3MenuItemActionPerformed
-        CrearArchivoFrame archivoInternalFrame = new CrearArchivoFrame(this);
+        CrearArchivoFrame archivoInternalFrame = new CrearArchivoFrame(this, constantSD.PARTICION_INDEXADA);
         archivoInternalFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_crearP3MenuItemActionPerformed
 
     private void eliminarP2MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarP2MenuItemActionPerformed
-        EliminarArchivoFrame eliminarArchivoFrame = new EliminarArchivoFrame(this);
+        EliminarArchivoFrame eliminarArchivoFrame = new EliminarArchivoFrame(this, constantSD.PARTICION_ENLAZADA);
         eliminarArchivoFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_eliminarP2MenuItemActionPerformed
 
     private void eliminarP3MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarP3MenuItemActionPerformed
-        EliminarArchivoFrame eliminarArchivoFrame = new EliminarArchivoFrame(this);
+        EliminarArchivoFrame eliminarArchivoFrame = new EliminarArchivoFrame(this, constantSD.PARTICION_INDEXADA);
         eliminarArchivoFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_eliminarP3MenuItemActionPerformed
 
     private void modificarP2MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarP2MenuItemActionPerformed
-        ModificarArchivoFrame archivoFrame = new ModificarArchivoFrame(this);
+        ModificarArchivoFrame archivoFrame = new ModificarArchivoFrame(this, constantSD.PARTICION_ENLAZADA);
         archivoFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_modificarP2MenuItemActionPerformed
 
     private void modificarP3MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarP3MenuItemActionPerformed
-        ModificarArchivoFrame archivoFrame = new ModificarArchivoFrame(this);
+        ModificarArchivoFrame archivoFrame = new ModificarArchivoFrame(this, constantSD.PARTICION_INDEXADA);
         archivoFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_modificarP3MenuItemActionPerformed
@@ -616,6 +626,10 @@ public class PrincipalFrame extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void reporteDirectorioMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteDirectorioMenuItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reporteDirectorioMenuItemActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton colorButton;
     private javax.swing.JMenuItem consultarP1MenuItem;
@@ -646,9 +660,7 @@ public class PrincipalFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
-    private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem21;
     private javax.swing.JMenuItem jMenuItem22;
     private javax.swing.JMenuItem jMenuItem23;
@@ -666,5 +678,16 @@ public class PrincipalFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem peorAjusteMenuItem;
     private javax.swing.JTextField porcentajeParticionTextField;
     private javax.swing.JMenuItem primerAjusteMenuItem;
+    private javax.swing.JMenuItem reporteBloquesMenuItem;
+    private javax.swing.JMenuItem reporteDirectorioMenuItem;
     // End of variables declaration//GEN-END:variables
+
+    public Linked getLinkedP() {
+        return linkedP;
+    }
+
+    public void setLinkedP(Linked linkedP) {
+        this.linkedP = linkedP;
+    }
+
 }

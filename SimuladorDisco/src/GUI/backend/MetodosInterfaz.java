@@ -77,13 +77,21 @@ public class MetodosInterfaz {
 
     }
 
+    /**
+     * This method create a file, base in the text and name set to the new file
+     *
+     * @param nombre
+     * @param cadena
+     * @return
+     * @throws IOException
+     */
     public File Guardar(String nombre, String cadena) throws IOException {
         long size = 0;
         File file = null;
         if (nombre != null && cadena != null) {
             //AgregarNombreAlArchivoSalida(nombre);
 
-             file = new File(nombre + ".bin");
+            file = new File(nombre + ".bin");
             FileWriter fileWriter = new FileWriter(file);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(cadena);
@@ -99,11 +107,17 @@ public class MetodosInterfaz {
         // System.out.println(fileChooser2.getSelectedFile());
         return file;
     }
-    
-   private JFileChooser fileChooser;
-   private File archivo;
-   
-     public String AbrirBin() {
+
+    private JFileChooser fileChooser;
+    private File archivo;
+
+    /**
+     * This method implement the File Chooser to get the file, then read the
+     * file to get the text
+     *
+     * @return
+     */
+    public String AbrirBin() {
 
         String aux = "";
         String texto = "";
@@ -146,7 +160,7 @@ public class MetodosInterfaz {
                     + "\nNo se ha encontrado el archivo", "ADVERTENCIA!!!",
                     JOptionPane.WARNING_MESSAGE);
         }
-        
+
         return texto;
     }
 
