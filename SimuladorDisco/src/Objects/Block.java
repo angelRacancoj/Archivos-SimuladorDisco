@@ -7,15 +7,29 @@ import java.io.File;
  * @author teodoro
  */
 public class Block {
-    
+
     private int id;
     private int size;
+    private File data;
 
-    public Block(int id, int size){
+    public Block(int id, int size) {
         this.id = id;
         this.size = size;
     }
-    
+
+    public Block(int id, File data) {
+        this.id = id;
+        this.data = data;
+    }
+
+    public File getData() {
+        return data;
+    }
+
+    public void setData(File data) {
+        this.data = data;
+    }
+
     public int getId() {
         return id;
     }
@@ -31,5 +45,5 @@ public class Block {
     public void setSize(int size) {
         this.size = size;
     }
-    
+
 }
