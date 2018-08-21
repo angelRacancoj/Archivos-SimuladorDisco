@@ -65,7 +65,7 @@ public class CrearArchivoFrame extends javax.swing.JFrame {
 
         jLabel1.setText("Ingrese el nombre (codigo):");
 
-        nombreFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#########"))));
+        nombreFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         jLabel2.setText("Ingrese la informacion:");
 
