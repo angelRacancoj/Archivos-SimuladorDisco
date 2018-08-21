@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package frontend;
+package GUI.frontend;
 
-import backend.MetodosInterfaz;
-import frontend.pantallas.ConsultarArchivoFrame;
-import frontend.pantallas.CrearArchivoFrame;
-import frontend.pantallas.EliminarArchivoFrame;
-import frontend.pantallas.ModificarArchivoFrame;
+import GUI.backend.MetodosInterfaz;
+import GUI.frontend.pantallas.ConsultarArchivoFrame;
+import GUI.frontend.pantallas.CrearArchivoFrame;
+import GUI.frontend.pantallas.EliminarArchivoFrame;
+import GUI.frontend.pantallas.ModificarArchivoFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -615,7 +615,6 @@ public class PrincipalFrame extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton colorButton;

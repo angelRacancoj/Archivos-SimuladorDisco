@@ -20,11 +20,11 @@ public class Linked {
     //como parametro el tamano de la particion en MB
     public Linked(int DiskSize) {
         //conversion de MB a Bytes
-        this.DiskSize = DiskSize*1024*1024;
+        this.DiskSize = DiskSize * 1024 * 1024;
         this.directory = new ArrayList<>();
         this.blocks = new ArrayList<>();
         //crear los bloques
-        createBlocks(DiskSize);
+        createBlocks(this.DiskSize);
     }
 
     public List<Directory> getDirectory() {
@@ -49,6 +49,7 @@ public class Linked {
             this.blocks.add(new BlockLinked(i, null, 0));
         }
     }
+
     //metodo recursivo para insertar archvo
     private int insertFile(int index, int size) {
         if (size == 0) {
@@ -73,17 +74,21 @@ public class Linked {
         }
     }
 
+    /**
+     *
+     * @param file
+     */
     public void insert(File file) {
         //calcular la cantidad de bloques que usara el archivo
-        int size=(int) (file.getTotalSpace()/4);
+        int size = (int) (file.getTotalSpace() / 4);
         boolean repeat = true;
         int position = index();
         if (space(size)) {
             //agregamos el archivo a guardar en el directorio de archivos
-            directory.add(new Directory(Integer.parseInt(file.getName()),position));
+            directory.add(new Directory(Integer.parseInt(file.getName()), position));
             while (repeat) {
                 if (isEmpty(position)) {
-                    //para no modificar el master no cambie el tipo de atributo para date pero ahi hay que mandar el path 
+                    //para no modificar el master no cambie el tipo de atributo para date pero ahi hay que mandar el path
                     blocks.get(position).setData(file);
                     blocks.get(position).setPuntero(insertFile(index(), size - 1));
                     break;
@@ -105,19 +110,20 @@ public class Linked {
         }
         return result;
     }
-    private int sizeData(BlockLinked puntero){
-        if(puntero.getPuntero()!=-1){
-            return 1+sizeData(blocks.get(puntero.getPuntero()));
-        }else{
+
+    private int sizeData(BlockLinked puntero) {
+        if (puntero.getPuntero() != -1) {
+            return 1 + sizeData(blocks.get(puntero.getPuntero()));
+        } else {
             return 1;
         }
     }
 
     public int getSizeData(int idFile) {
         int val;
-        if (dataExist(idFile)!=null) {
-            int index=dataExist(idFile).getPosition();
-            return 1+sizeData(blocks.get(blocks.get(index).getPuntero())); 
+        if (dataExist(idFile) != null) {
+            int index = dataExist(idFile).getPosition();
+            return 1 + sizeData(blocks.get(blocks.get(index).getPuntero()));
         } else {
             //archivo no encontrado
             return -1;
@@ -128,7 +134,7 @@ public class Linked {
         Directory state = null;
         for (int i = 0; i < directory.size(); i++) {
             if (directory.get(i).getFile() == idFile) {
-                state = directory.get(i); 
+                state = directory.get(i);
                 break;
             }
         }

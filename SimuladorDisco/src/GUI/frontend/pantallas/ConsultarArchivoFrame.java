@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package frontend.pantallas;
+package GUI.frontend.pantallas;
 
-import backend.MetodosInterfaz;
+import GUI.backend.MetodosInterfaz;
 import javax.swing.JFrame;
 
 /**
@@ -120,7 +120,6 @@ public class ConsultarArchivoFrame extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         textoTextArea.setText(metodosInterfaz.AbrirBin());
     }//GEN-LAST:event_jButton2ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelarButton;

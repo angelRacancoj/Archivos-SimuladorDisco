@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package frontend;
+package GUI.frontend;
 
-import backend.MetodosInterfaz;
+import GUI.backend.MetodosInterfaz;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,9 +18,9 @@ public class InicioFrame extends javax.swing.JFrame {
      * Creates new form InicioFrame
      */
     MetodosInterfaz metodosInterfaz;
-    int pixelesParticion1=0;
-    int pixelesParticion2=0;
-    int pixelesParticion3=0;
+    int pixelesParticion1 = 0;
+    int pixelesParticion2 = 0;
+    int pixelesParticion3 = 0;
 
     public InicioFrame() {
         initComponents();
@@ -345,16 +345,18 @@ public class InicioFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void crearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearButtonActionPerformed
-        
-        if( !nombreDiscoTextField.getText().isEmpty() && (int) diskSizeSpinner.getValue()>0 && (int) bloqueP1SizeSpinner.getValue()>0  && (int) bloqueP2SizeSpinner.getValue()>0 && (int) bloqueP3SizeSpinner.getValue()>0){
-        
-            PrincipalFrame frame = new PrincipalFrame(Integer.parseInt(particion1TextField.getText()),Integer.parseInt(particion2TextField.getText()),Integer.parseInt(particion3TextField.getText()),  (int)diskSizeSpinner.getValue() );
-         JOptionPane.showMessageDialog(null, "\nDisco montado correctamente. ", "ADVERTENCIA!!!", JOptionPane.INFORMATION_MESSAGE);
 
-        frame.setVisible(true);
-        this.setVisible(false);
-        }else{
-             JOptionPane.showMessageDialog(null, "\nTodos los campos deben estar llenos. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
+        if (!nombreDiscoTextField.getText().isEmpty() && (int) diskSizeSpinner.getValue() > 0 && (int) bloqueP1SizeSpinner.getValue() > 0
+                && (int) bloqueP2SizeSpinner.getValue() > 0 && (int) bloqueP3SizeSpinner.getValue() > 0) {
+
+            PrincipalFrame frame = new PrincipalFrame(Integer.parseInt(particion1TextField.getText()), Integer.parseInt(
+                    particion2TextField.getText()), Integer.parseInt(particion3TextField.getText()), (int) diskSizeSpinner.getValue());
+            JOptionPane.showMessageDialog(null, "\nDisco montado correctamente. ", "ADVERTENCIA!!!", JOptionPane.INFORMATION_MESSAGE);
+
+            frame.setVisible(true);
+            this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "\nTodos los campos deben estar llenos. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_crearButtonActionPerformed
 
@@ -381,7 +383,6 @@ public class InicioFrame extends javax.swing.JFrame {
 
         //metodosInterfaz.AgregarValor_TextField(particion3Slider, particion3TextField);
     }//GEN-LAST:event_particion3SliderStateChanged
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner bloqueP1SizeSpinner;
