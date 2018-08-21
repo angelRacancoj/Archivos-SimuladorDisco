@@ -15,27 +15,30 @@ import java.util.ArrayList;
  */
 public class Indexed_Partition {
     
-    private String name;
     private int size;
     private int blockSize;
-    
     private ArrayList<Indexed_Block> blocks;
     private ArrayList<File> directory;
 
-    public Indexed_Partition(String name, int size, int blockSize) {
-        this.name = name;
-        this.size = size;
-        this.blockSize = blockSize;
-        this.blocks = createBlocks(size, blockSize);
+    public Indexed_Partition() {
+        this.blocks = new ArrayList<>();
         this.directory = new ArrayList<>();
     }
 
-    public String getName() {
-        return name;
+    public ArrayList<Indexed_Block> getBlocks() {
+        return blocks;
+    }
+    
+    public void setBlocks(ArrayList<Indexed_Block> blocks) {
+        this.blocks = blocks;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public ArrayList<File> getDirectory() {
+        return directory;
+    }
+    
+    public void setDirectory(ArrayList<File> directory) {
+        this.directory = directory;
     }
 
     public int getSize() {
@@ -54,28 +57,12 @@ public class Indexed_Partition {
         this.blockSize = blockSize;
     }
 
-    public ArrayList<Indexed_Block> getBlocks() {
-        return blocks;
-    }
-
-    public void setBlocks(ArrayList<Indexed_Block> blocks) {
-        this.blocks = blocks;
-    }
-
-    public ArrayList<File> getDirectory() {
-        return directory;
-    }
-
-    public void setDirectory(ArrayList<File> directory) {
-        this.directory = directory;
-    }
-    
-    private ArrayList<Indexed_Block> createBlocks(int size, int blockSize){
-        ArrayList<Indexed_Block> blocks = new ArrayList<>();
+    public void createBlocks(int size, int blockSize){
+        ArrayList<Indexed_Block> blocksList = new ArrayList<>();
         for (int i = 0; i < (size/blockSize); i++) {
             Indexed_Block block = new Indexed_Block(i, blockSize);
-            blocks.add(block);
+            blocksList.add(block);
         }
-        return blocks;
+        this.blocks.addAll(blocksList);
     }
 }

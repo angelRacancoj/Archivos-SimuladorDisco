@@ -1,5 +1,6 @@
 package Run;
 
+import Exceptions.OutOfRangeException;
 import Exceptions.WithoutSpaceException;
 import Handlers.Indexed_Handler;
 import java.util.Scanner;
@@ -28,27 +29,30 @@ public class Run {
             Indexed_Handler indexedHandler = new Indexed_Handler();
             switch (option) {
                 case 1:
-                    System.out.println("Ingrsese el nombre de la particion: ");
-                    int name = entrada.nextInt();
                     System.out.println("Ingrese el tamaño de la particion (Mb): ");
                     int size = entrada.nextInt();
                     System.out.println("Ingrese el tamaño de los bloques (Kb): ");
                     int blocksize = entrada.nextInt();
-                    indexedHandler.createPartition(String.valueOf(name), size, blocksize);
+                    try {
+                        indexedHandler.createPartition(size, blocksize);
+                    } catch (OutOfRangeException ex) {
+                        System.out.println(ex.getMessage());
+                    }
                     break;
                 case 2:
-                    System.out.println("Ingrese nombre del archivo: ");
+                    System.out.println("Ingrese el id del archivo: ");
                     int idFile = entrada.nextInt();
-                    System.out.println("Ingrese el tamaño del archivo (Kb): ");
-                    int fileSize = entrada.nextInt();
+                    System.out.println("Ingrese el tamaño del archio (Kb): ");
+                    int sizeFile = entrada.nextInt();
                     try {
-                        indexedHandler.createFile(idFile, fileSize);
+                        indexedHandler.createFile(idFile, sizeFile);
                     } catch (WithoutSpaceException ex) {
                         Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
                     }
+            
                     break;
                 case 3:
-                    System.out.println("Espacio disponible: " + indexedHandler.freeSpace());
+                    System.out.println("Espacio Disponible: " + indexedHandler.freeSpace());
                     break;
                 case 4:
                     break;
