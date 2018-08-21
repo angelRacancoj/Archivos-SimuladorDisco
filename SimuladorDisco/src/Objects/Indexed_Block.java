@@ -17,7 +17,6 @@ public class Indexed_Block extends Block{
     
     private int status;
     private int spaceUsed; 
-    
     private Indexed_Block[] prompters = new Indexed_Block[Constants.POINTERS_PER_BLOCK];
     
     public Indexed_Block(int id, int size) {

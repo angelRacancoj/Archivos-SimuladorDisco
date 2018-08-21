@@ -19,4 +19,6 @@ public class Constants {
     
     //Punteros que almacenara el un bloque indice (Asignacion indexada)
     public static final int POINTERS_PER_BLOCK = 10;
+    
+    public static final int BLOCK_PER_LINE_REPORT = 5;
 }

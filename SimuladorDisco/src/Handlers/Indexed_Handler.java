@@ -6,11 +6,15 @@
 package Handlers;
 
 import Constants.Constants;
+import Exceptions.ExistenceException;
 import Exceptions.OutOfRangeException;
 import Exceptions.WithoutSpaceException;
 import Objects.File;
 import Objects.Indexed_Block;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import partitions.Indexed_Partition;
 
 /**
@@ -51,19 +55,20 @@ public class Indexed_Handler {
      * @param size
      * @throws WithoutSpaceException 
      */
-    public void createFile(int id, int size) throws WithoutSpaceException{
+    public void createFile(int id, int size) throws WithoutSpaceException, ExistenceException{
         int requiredBlock = requiredBlocks(size);
         int filesInDirextory = filesInDirectory(requiredBlock);
         int totalBlocksNeeded = requiredBlock + filesInDirextory;
         int spaceRequired = totalBlocksNeeded * Indexed_Block.SIZE_BLOCK;
         if (freeSpace() < spaceRequired){
             throw new WithoutSpaceException("No se puede Guardar el archivo\n Espacio Insuficiente");
+        } else if (searchFile(id) != null){
+            throw new ExistenceException("Ya existe un archivo con ese Id");
         } else {
-            ArrayList<Indexed_Block> blocks = indexedPartition.getBlocks();
             for (int i = 0; i < filesInDirextory; i++) {       
                 Indexed_Block indexBlock = searchfreeBlock();
                 indexBlock.setStatus(Constants.INDEX);
-                locateFile(size, indexBlock);
+                size = locateFile(size, indexBlock);
                 indexedPartition.getDirectory().add(new File(id,indexBlock));
             }
         }
@@ -99,15 +104,25 @@ public class Indexed_Handler {
         return null;
     }
     
+    private File searchFile(int id){
+        ArrayList<File> directory = indexedPartition.getDirectory();
+        for (int i = 0; i < directory.size(); i++) {
+            if (directory.get(i).getId() == id){
+                return directory.get(i);
+            }
+        }
+        return null;
+    }
     
-    private void locateFile(int size, Indexed_Block index){
+    private int locateFile(int size, Indexed_Block index){
         int counter = 0;
-        while (size > 0){
+        while (size > 0 && counter<Constants.POINTERS_PER_BLOCK){
             Indexed_Block dataBlock = searchfreeBlock();
             size = fillBlockData(size, dataBlock);
             index.getPrompters()[counter] = dataBlock;
             counter++;
         }
+        return size;
     }
     
     private int fillBlockData(int size, Indexed_Block block){
@@ -143,4 +158,87 @@ public class Indexed_Handler {
     private int convertMbtoKb(int mb){
         return mb*1024;
     }
+    
+    public String directoryReport(){
+        String report = "REPORTE DE DIRECTORIO - ASIGNACION INDEXADA\n";
+        Date date = new Date();
+        DateFormat hourdateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        report += ("Fecha del Reporte: "+hourdateFormat.format(date));
+        report += "\n-------------------------------------------\n";
+        report += "\nARCHIVO              BLOQUE INDICE\n";
+        for (int i = 0; i < indexedPartition.getDirectory().size(); i++) {
+            report += indexedPartition.getDirectory().get(i).getId() + "                    "
+                    + indexedPartition.getDirectory().get(i).getIndexBlock().getId() + "\n";
+        }
+        return report;
+    }
+    
+    public String blockReport(int numberOfBlocks) throws OutOfRangeException{
+        if (indexedPartition.getBlocks().size() < numberOfBlocks){
+            throw new OutOfRangeException("La cantidad de bloques ingresada es mayor a la existente");
+        } else {
+            String report = "REPORTE DE BLOQUES - ASIGNACION INDEXADA\n";
+            Date date = new Date();
+            DateFormat hourdateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            report += ("Fecha del Reporte: "+hourdateFormat.format(date));
+        report += "\n-------------------------------------------\n";
+        report += printBlocks(numberOfBlocks);
+        return report;
+        }   
+    }
+    
+    private String printBlocks(int numberOfBlocks){
+        int blocksPerLine = 0;
+        String text = "";
+        ArrayList<Indexed_Block> blocks = indexedPartition.getBlocks();
+        for (int i = 0; i < numberOfBlocks; i++) {
+            if (blocksPerLine < Constants.BLOCK_PER_LINE_REPORT){
+                blocksPerLine++;
+                text += printOneBlock(blocks.get(i));
+            } else {
+                text += "\n";
+                blocksPerLine = 0;
+                text += printOneBlock(blocks.get(i));
+            }
+        }
+        return text;
+    }
+    
+    private String printOneBlock(Indexed_Block block){
+        String textBlock = "";
+        switch (block.getStatus()){
+            case Constants.DATA:
+                textBlock = "|" + block.getId() + "_" + "Ocupado: " + block.getSpaceUsed() + "_" + Constants.OCCUPIED + "|";
+                break;
+            case Constants.INDEX:
+                textBlock = "|{" + block.getId() + "_" + printIndexes(block) + "_" + Constants.OCCUPIED + "}|";
+                break;
+            case Constants.FREE:
+                textBlock = "|" + block.getId() + "_" + "-------"+ "_" + Constants.FREE + "|";
+                break;
+            default:
+                break;
+        }
+        return textBlock;
+    }
+    
+    private String printIndexes(Indexed_Block block){
+        String text = "";
+        for (int i = 0; i < Constants.POINTERS_PER_BLOCK; i++) {
+            if (block.getPrompters()[i] != null){
+                text += block.getPrompters()[i].getId() + " ";
+            }
+        }
+        return text;
+    }
+    /*
+    private String indexFile(int id){
+        String indexes = "";
+        for (int i = 0; i < indexedPartition.getDirectory().size(); i++) {
+            if (indexedPartition.getDirectory().get(i).getId() == id){
+                indexes += indexedPartition.getDirectory().get(i).getIndexBlock().getId() + " ";
+            }
+        }
+        return indexes;
+    }*/
 }

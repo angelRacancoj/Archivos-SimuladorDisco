@@ -1,11 +1,10 @@
 package Run;
 
+import Exceptions.ExistenceException;
 import Exceptions.OutOfRangeException;
 import Exceptions.WithoutSpaceException;
 import Handlers.Indexed_Handler;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Run {
 
@@ -16,17 +15,17 @@ public class Run {
         
         Scanner entrada = new Scanner(System.in);
         int option = 0;
+        Indexed_Handler indexedHandler = new Indexed_Handler();
         do {
             System.out.println("======= Menu =======");
             System.out.println("Ingrese una opción: ");
             System.out.println("1. Crear Disco");
             System.out.println("2. Crear Archivo");
             System.out.println("3. Espacio Disponible");
-            System.out.println("4. Cuadros utilizados");
-            System.out.println("5. Cuadros totales");
+            System.out.println("4. Reporte Directorio");
+            System.out.println("5. Reporte Bloques");
             System.out.println("6. Salir");
             option = entrada.nextInt();
-            Indexed_Handler indexedHandler = new Indexed_Handler();
             switch (option) {
                 case 1:
                     System.out.println("Ingrese el tamaño de la particion (Mb): ");
@@ -46,17 +45,26 @@ public class Run {
                     int sizeFile = entrada.nextInt();
                     try {
                         indexedHandler.createFile(idFile, sizeFile);
-                    } catch (WithoutSpaceException ex) {
-                        Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (WithoutSpaceException | ExistenceException ex) {
+                        System.out.println(ex.getMessage());
                     }
-            
                     break;
                 case 3:
                     System.out.println("Espacio Disponible: " + indexedHandler.freeSpace());
                     break;
                 case 4:
+                    System.out.println(indexedHandler.directoryReport());
                     break;
                 case 5:
+                    System.out.println("Ingrese la cantidad de bloques a visualizar: ");
+                    int blocks = entrada.nextInt();
+            
+                    try {
+                        System.out.println(indexedHandler.blockReport(blocks));
+                    } catch (OutOfRangeException ex) {
+                        System.out.println(ex.getMessage());
+                    }
+            
                     break;
                 case 6:
                     break;
