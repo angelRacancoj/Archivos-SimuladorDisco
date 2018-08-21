@@ -18,13 +18,13 @@ public class Linked {
     private List<BlockLinked> blocks;
 
     //como parametro el tamano de la particion en MB
-    public Linked(int DiskSize) {
-        //conversion de MB a Bytes
-        this.DiskSize = DiskSize * 1024 * 1024;
+    public Linked(int DiskSize,int sizeBlocks) {
+        //conversion de MB a Kb
+        this.DiskSize = DiskSize * 1024;
         this.directory = new ArrayList<>();
         this.blocks = new ArrayList<>();
         //crear los bloques
-        createBlocks(this.DiskSize);
+        createBlocks(this.DiskSize,sizeBlocks);
     }
 
     public List<Directory> getDirectory() {
@@ -33,6 +33,11 @@ public class Linked {
 
     public void setDirectory(List<Directory> directory) {
         this.directory = directory;
+    }
+    public void formatDisk(){
+        for (int i = 0; i < blocks.size(); i++) {
+            blocks.set(i, new BlockLinked(i, null, 0));
+        }
     }
 
     public List<BlockLinked> getBlocks() {
@@ -43,8 +48,8 @@ public class Linked {
         this.blocks = blocks;
     }
 
-    private void createBlocks(int size) {
-        int quantity = size / 5;
+    private void createBlocks(int size,int sizeBlocks) {
+        int quantity = size / sizeBlocks;
         for (int i = 0; i < quantity; i++) {
             this.blocks.add(new BlockLinked(i, null, 0));
         }
@@ -116,6 +121,46 @@ public class Linked {
             return 1 + sizeData(blocks.get(puntero.getPuntero()));
         } else {
             return 1;
+        }
+    }
+
+    public File getFile(int id) {
+        Directory file = dataExist(id);
+        if (file != null) {
+            return blocks.get(file.getPosition()).getData();
+        } else {
+            //file no encontrado
+            return null;
+        }
+    }
+    private void resetBlock(BlockLinked block){
+        blocks.set(block.getId(),new BlockLinked(block.getId(), null, 0));
+    }
+    private void delete(int puntero){
+        if(puntero!=-1){
+            delete(blocks.get(puntero).getPuntero());
+            resetBlock(blocks.get(puntero));
+        }else{
+            resetBlock(blocks.get(puntero));
+        }
+    }
+
+    public void deleteFile(int id) {
+        Directory file = dataExist(id);
+        if (file != null) {
+            delete(file.getPosition());
+            directory.remove(file);
+        } else {
+            //no existe el archivo
+        }
+    }
+
+    public void modifyFile(File file) {
+        if (dataExist(Integer.parseInt(file.getName())) != null) {
+            deleteFile(Integer.parseInt(file.getName()));
+            insert(file); 
+        } else {
+            //no existe el archivo
         }
     }
 
