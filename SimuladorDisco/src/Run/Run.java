@@ -21,10 +21,11 @@ public class Run {
             System.out.println("Ingrese una opción: ");
             System.out.println("1. Crear Disco");
             System.out.println("2. Crear Archivo");
-            System.out.println("3. Espacio Disponible");
-            System.out.println("4. Reporte Directorio");
-            System.out.println("5. Reporte Bloques");
-            System.out.println("6. Salir");
+            System.out.println("3. Reporte Directorio");
+            System.out.println("4. Reporte Bloques");
+            System.out.println("5. Formatear Partición");
+            System.out.println("6. Consultar Archivo");
+            System.out.println("7. Salir");
             option = entrada.nextInt();
             switch (option) {
                 case 1:
@@ -50,12 +51,9 @@ public class Run {
                     }
                     break;
                 case 3:
-                    System.out.println("Espacio Disponible: " + indexedHandler.freeSpace());
-                    break;
-                case 4:
                     System.out.println(indexedHandler.directoryReport());
                     break;
-                case 5:
+                case 4:
                     System.out.println("Ingrese la cantidad de bloques a visualizar: ");
                     int blocks = entrada.nextInt();
             
@@ -66,11 +64,22 @@ public class Run {
                     }
             
                     break;
+                case 5:
+                    indexedHandler.formatPartition();
+                    break;
                 case 6:
+                    System.out.println("Ingrese el id del archivo: ");
+                    int idFileSearch = entrada.nextInt();
+                    try {
+                        System.out.println(indexedHandler.consultSizeFile(idFileSearch));
+                    } catch (ExistenceException ex) {
+                        System.out.println(ex.getMessage());
+                    }
+            
                     break;
                 default:
                     break;
             }
-        } while(option!=6);        
+        } while(option!=7);        
     }
 }

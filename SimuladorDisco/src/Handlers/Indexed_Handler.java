@@ -55,7 +55,7 @@ public class Indexed_Handler {
      * @param size
      * @throws WithoutSpaceException 
      */
-    public void createFile(int id, int size) throws WithoutSpaceException, ExistenceException{
+    public boolean createFile(int id, int size) throws WithoutSpaceException, ExistenceException{
         int requiredBlock = requiredBlocks(size);
         int filesInDirextory = filesInDirectory(requiredBlock);
         int totalBlocksNeeded = requiredBlock + filesInDirextory;
@@ -72,6 +72,7 @@ public class Indexed_Handler {
                 indexedPartition.getDirectory().add(new File(id,indexBlock));
             }
         }
+        return true;
     }
     
     private int requiredBlocks(int size){
@@ -140,7 +141,7 @@ public class Indexed_Handler {
      * Determina el almacenamiento libre en KyloBytes
      * @return ALmacenamiento libre/Disponible en KyloBytes
      */
-    public int freeSpace(){
+    private int freeSpace(){
         int amountOfFreeBlocks = 0;
         for (int i = 0; i < indexedPartition.getBlocks().size(); i++) {
             if (indexedPartition.getBlocks().get(i).getStatus() == Constants.FREE){
@@ -241,4 +242,57 @@ public class Indexed_Handler {
         }
         return indexes;
     }*/
+    
+    public boolean formatPartition(){
+        for (int i = 0; i < indexedPartition.getDirectory().size(); i++) {
+            indexedPartition.getDirectory().get(i).getIndexBlock().setStatus(Constants.FREE);
+            for (int j = 0; j < Constants.POINTERS_PER_BLOCK; j++) {
+                if (indexedPartition.getDirectory().get(i).getIndexBlock().getPrompters()[j] != null){
+                    indexedPartition.getDirectory().get(i).getIndexBlock().getPrompters()[j].setStatus(Constants.FREE);
+                }
+                indexedPartition.getDirectory().get(i).getIndexBlock().getPrompters()[j] = null;
+            }
+        }
+        indexedPartition.getDirectory().clear();
+        return true;
+    }
+    
+    public String consultSizeFile(int id) throws ExistenceException{
+        File file = searchFile(id);
+        if (file == null){
+            throw new ExistenceException("No Existe el Archivo");
+        } 
+        return "Archivo: " + id + "\n"+ 
+                "Tamaño real del archivo: " + checkActualFileSize(id) + "\n"+ 
+                "Tamaño en Disco del Archivo: " + checkFileSizeOnDisk(id);
+        
+    }
+    
+    private int checkActualFileSize(int id){
+        int size = 0;
+        for (int i = 0; i < indexedPartition.getDirectory().size(); i++) {
+            if (indexedPartition.getDirectory().get(i).getId() == id){
+                for (int j = 0; j < Constants.POINTERS_PER_BLOCK; j++) {
+                    if (indexedPartition.getDirectory().get(i).getIndexBlock().getPrompters()[j] != null){
+                        size += indexedPartition.getDirectory().get(i).getIndexBlock().getPrompters()[j].getSpaceUsed();
+                    }
+                }
+            } 
+        }
+        return size;
+    }
+    
+    private int checkFileSizeOnDisk(int id){
+        int size = 0;
+        for (int i = 0; i < indexedPartition.getDirectory().size(); i++) {
+            if (indexedPartition.getDirectory().get(i).getId() == id){
+                for (int j = 0; j < Constants.POINTERS_PER_BLOCK; j++) {
+                    if (indexedPartition.getDirectory().get(i).getIndexBlock().getPrompters()[j] != null){
+                        size ++;
+                    }
+                }
+            } 
+        }
+        return size*Indexed_Block.SIZE_BLOCK;
+    }
 }

@@ -63,6 +63,7 @@ public class Indexed_Partition {
             Indexed_Block block = new Indexed_Block(i, blockSize);
             blocksList.add(block);
         }
+        this.blocks.clear();
         this.blocks.addAll(blocksList);
     }
 }
