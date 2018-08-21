@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package graphicdesign;
+package GUI.graphicdesign;
 
 import UpperEssential.UpperEssentialLookAndFeel;
-import frontend.InicioFrame;
-import frontend.PrincipalFrame;
+import GUI.frontend.InicioFrame;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -26,8 +25,7 @@ public class GraphicDesign {
         try {
 
             UIManager.setLookAndFeel(new UpperEssentialLookAndFeel());
-           
-            
+
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(GraphicDesign.class.getName()).log(Level.SEVERE, null, ex);
         }

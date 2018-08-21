@@ -79,6 +79,10 @@ public class Linked {
         }
     }
 
+    /**
+     *
+     * @param file
+     */
     public void insert(File file) {
         //calcular la cantidad de bloques que usara el archivo
         int size = (int) (file.getTotalSpace() / 4);
@@ -89,7 +93,7 @@ public class Linked {
             directory.add(new Directory(Integer.parseInt(file.getName()), position));
             while (repeat) {
                 if (isEmpty(position)) {
-                    //para no modificar el master no cambie el tipo de atributo para date pero ahi hay que mandar el path 
+                    //para no modificar el master no cambie el tipo de atributo para date pero ahi hay que mandar el path
                     blocks.get(position).setData(file);
                     blocks.get(position).setPuntero(insertFile(index(), size - 1));
                     break;

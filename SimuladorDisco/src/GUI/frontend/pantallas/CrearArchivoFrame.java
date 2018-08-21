@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package frontend.pantallas;
+package GUI.frontend.pantallas;
 
-import backend.MetodosInterfaz;
+import GUI.backend.MetodosInterfaz;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -129,7 +129,6 @@ public class CrearArchivoFrame extends javax.swing.JFrame {
         this.setVisible(false);
         frame.setVisible(true);
     }//GEN-LAST:event_cancelarButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelarButton;

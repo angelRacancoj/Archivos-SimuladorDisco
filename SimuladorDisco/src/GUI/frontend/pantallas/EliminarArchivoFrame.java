@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package frontend.pantallas;
+package GUI.frontend.pantallas;
 
-import frontend.PrincipalFrame;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -18,8 +17,8 @@ public class EliminarArchivoFrame extends javax.swing.JFrame {
     /**
      * Creates new form EliminarArchivoFrame
      */
-    
     JFrame frame;
+
     public EliminarArchivoFrame(JFrame frame) {
         initComponents();
         this.frame = frame;
@@ -93,13 +92,13 @@ public class EliminarArchivoFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
-if( !idArchivoEliminarTextField.getText().isEmpty()){
-        JOptionPane.showMessageDialog(null, "\nEl archivo se a eliminado correctamente. ", "ADVERTENCIA!!!", JOptionPane.INFORMATION_MESSAGE);
-         this.setVisible(false);
-        frame.setVisible(true);
-} else{
-        JOptionPane.showMessageDialog(null, "\nDebe llenar todos los campos. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
-}
+        if (!idArchivoEliminarTextField.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "\nEl archivo se a eliminado correctamente. ", "ADVERTENCIA!!!", JOptionPane.INFORMATION_MESSAGE);
+            this.setVisible(false);
+            frame.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "\nDebe llenar todos los campos. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_borrarButtonActionPerformed
 
     private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
@@ -108,7 +107,6 @@ if( !idArchivoEliminarTextField.getText().isEmpty()){
         frame.setVisible(true);
     }//GEN-LAST:event_cancelarButtonActionPerformed
 
-   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton borrarButton;
     private javax.swing.JButton cancelarButton;
