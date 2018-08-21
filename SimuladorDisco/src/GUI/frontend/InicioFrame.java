@@ -19,6 +19,7 @@ public class InicioFrame extends javax.swing.JFrame {
      * Creates new form InicioFrame
      */
     MetodosInterfaz metodosInterfaz;
+    PrincipalFrame frame;
     int pixelesParticion1 = 0;
     int pixelesParticion2 = 0;
     int pixelesParticion3 = 0;
@@ -356,7 +357,7 @@ public class InicioFrame extends javax.swing.JFrame {
             linkedP = new Linked((int) ((Double.parseDouble(particion2TextField.getText()) / 100)
                     * ((int) diskSizeSpinner.getValue())), (int) bloqueP2SizeSpinner.getValue());
 
-            PrincipalFrame frame = new PrincipalFrame(Integer.parseInt(particion1TextField.getText()), Integer.parseInt(particion2TextField.getText()),
+            frame = new PrincipalFrame(Integer.parseInt(particion1TextField.getText()), Integer.parseInt(particion2TextField.getText()),
                     Integer.parseInt(particion3TextField.getText()), (int) diskSizeSpinner.getValue(), linkedP);
             JOptionPane.showMessageDialog(null, "\nDisco montado correctamente. ", "ADVERTENCIA!!!", JOptionPane.INFORMATION_MESSAGE);
 
@@ -421,4 +422,13 @@ public class InicioFrame extends javax.swing.JFrame {
     private javax.swing.JSlider particion3Slider;
     private javax.swing.JTextField particion3TextField;
     // End of variables declaration//GEN-END:variables
+
+    public Linked getLinkedP() {
+        return linkedP;
+    }
+
+    public void setLinkedP(Linked linkedP) {
+        this.linkedP = linkedP;
+    }
+
 }

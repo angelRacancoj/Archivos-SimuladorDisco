@@ -13,6 +13,7 @@ import java.util.List;
 public class Linked {
 
     private int DiskSize;
+    private int sizeBlocks;
     private List<Directory> directory;
     private List<BlockLinked> blocks;
 
@@ -29,6 +30,7 @@ public class Linked {
         this.DiskSize = DiskSize * 1024;
         this.directory = new ArrayList<>();
         this.blocks = new ArrayList<>();
+        this.sizeBlocks = sizeBlocks;
         //crear los bloques
         createBlocks(this.DiskSize, sizeBlocks);
     }
@@ -93,7 +95,7 @@ public class Linked {
      */
     public void insert(File file) {
         //calcular la cantidad de bloques que usara el archivo
-        int size = (int) (file.getTotalSpace() / 4);
+        int size = (int) (file.getTotalSpace() / sizeBlocks);
         boolean repeat = true;
         int position = index();
         if (space(size)) {

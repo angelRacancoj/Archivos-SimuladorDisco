@@ -63,7 +63,7 @@ public class CrearArchivoFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Crear Archivo");
 
-        jLabel1.setText("Ingrese el nombre:");
+        jLabel1.setText("Ingrese el nombre (codigo):");
 
         nombreFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#########"))));
 

@@ -88,7 +88,7 @@ public class MetodosInterfaz {
     public File Guardar(String nombre, String cadena) throws IOException {
         long size = 0;
         File file = null;
-        if (nombre != null && cadena != null) {
+        if (nombre.replaceAll(" ", "").replaceAll("\t", "").isEmpty() && cadena != null) {
             //AgregarNombreAlArchivoSalida(nombre);
 
             file = new File(nombre + ".bin");

@@ -43,6 +43,7 @@ public class PrincipalFrame extends javax.swing.JFrame {
         initComponents();
         this.setLayout(null);
         mbrButton.setBounds(0, 0, 280, 300);
+        this.linkedP = linkedP;
 
         int pixeles1 = (particion1Porcenaje / 100) * 1000;
         int pixeles2 = (particion2Porcenaje / 100) * 1000;
