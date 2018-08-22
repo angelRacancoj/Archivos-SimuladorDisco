@@ -5,6 +5,8 @@ import Exceptions.OutOfRangeException;
 import Exceptions.WithoutSpaceException;
 import Handlers.Indexed_Handler;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Run {
 
@@ -25,7 +27,9 @@ public class Run {
             System.out.println("4. Reporte Bloques");
             System.out.println("5. Formatear Partición");
             System.out.println("6. Consultar Archivo");
-            System.out.println("7. Salir");
+            System.out.println("7. Eliminar Archivo");
+            System.out.println("8. Modificar Archivo");
+            System.out.println("9. Salir");
             option = entrada.nextInt();
             switch (option) {
                 case 1:
@@ -75,11 +79,30 @@ public class Run {
                     } catch (ExistenceException ex) {
                         System.out.println(ex.getMessage());
                     }
-            
+                    break;
+                case 7:
+                    System.out.println("Ingrese el id del archivo a eliminar: ");
+                    int idFileDelete = entrada.nextInt();
+                    try {
+                        indexedHandler.deleteFile(idFileDelete);
+                    } catch (ExistenceException ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                    break;
+                case 8:
+                    System.out.println("Ingrese el id del archivo a modificar: ");
+                    int idFilemodify = entrada.nextInt();
+                    System.out.println("Ingrese el nuevo tamaño del archivo: (Kb)");
+                    int newSizeFilemodify = entrada.nextInt();
+                    try {
+                        indexedHandler.modifyFile(idFilemodify, newSizeFilemodify);
+                    } catch (ExistenceException | WithoutSpaceException ex) {
+                        System.out.println(ex.getMessage());
+                    }
                     break;
                 default:
                     break;
             }
-        } while(option!=7);        
+        } while(option!=8);        
     }
 }

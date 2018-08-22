@@ -1,7 +1,7 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+     * and open the template in the editor.
  */
 package Handlers;
 
@@ -58,8 +58,7 @@ public class Indexed_Handler {
     public boolean createFile(int id, int size) throws WithoutSpaceException, ExistenceException{
         int requiredBlock = requiredBlocks(size);
         int filesInDirextory = filesInDirectory(requiredBlock);
-        int totalBlocksNeeded = requiredBlock + filesInDirextory;
-        int spaceRequired = totalBlocksNeeded * Indexed_Block.SIZE_BLOCK;
+        int spaceRequired = spaceRequired(size);
         if (freeSpace() < spaceRequired){
             throw new WithoutSpaceException("No se puede Guardar el archivo\n Espacio Insuficiente");
         } else if (searchFile(id) != null){
@@ -73,6 +72,14 @@ public class Indexed_Handler {
             }
         }
         return true;
+    }
+    
+    private int spaceRequired(int size){
+        int requiredBlock = requiredBlocks(size);
+        int filesInDirextory = filesInDirectory(requiredBlock);
+        int totalBlocksNeeded = requiredBlock + filesInDirextory;
+        int spaceRequired = totalBlocksNeeded * Indexed_Block.SIZE_BLOCK;
+        return spaceRequired;
     }
     
     private int requiredBlocks(int size){
@@ -209,13 +216,13 @@ public class Indexed_Handler {
         String textBlock = "";
         switch (block.getStatus()){
             case Constants.DATA:
-                textBlock = "|" + block.getId() + "_" + "Ocupado: " + block.getSpaceUsed() + "_" + Constants.OCCUPIED + "|";
+                textBlock = "|" + block.getId() + "_" + "-------- Ocupado:" + block.getSpaceUsed() + " --------"  + "_" + Constants.OCCUPIED + "|";
                 break;
             case Constants.INDEX:
                 textBlock = "|{" + block.getId() + "_" + printIndexes(block) + "_" + Constants.OCCUPIED + "}|";
                 break;
             case Constants.FREE:
-                textBlock = "|" + block.getId() + "_" + "-------"+ "_" + Constants.FREE + "|";
+                textBlock = "|" + block.getId() + "_" + "---------------------------"+ "_" + Constants.FREE + "|";
                 break;
             default:
                 break;
@@ -228,6 +235,8 @@ public class Indexed_Handler {
         for (int i = 0; i < Constants.POINTERS_PER_BLOCK; i++) {
             if (block.getPrompters()[i] != null){
                 text += block.getPrompters()[i].getId() + " ";
+            } else {
+                text += "-- ";
             }
         }
         return text;
@@ -295,4 +304,48 @@ public class Indexed_Handler {
         }
         return size*Indexed_Block.SIZE_BLOCK;
     }
+    
+    public boolean deleteFile(int id) throws ExistenceException{
+        File file = searchFile(id);
+        if (file != null){
+            for (int i = 0; i < indexedPartition.getDirectory().size(); i++) {
+                if (indexedPartition.getDirectory().get(i).getId() == id){
+                    indexedPartition.getDirectory().get(i).getIndexBlock().setStatus(Constants.FREE);
+                    for (int j = 0; j < Constants.POINTERS_PER_BLOCK; j++) {
+                        if (indexedPartition.getDirectory().get(i).getIndexBlock().getPrompters()[j] != null){
+                            indexedPartition.getDirectory().get(i).getIndexBlock().getPrompters()[j].setStatus(Constants.FREE);
+                        }
+                        indexedPartition.getDirectory().get(i).getIndexBlock().getPrompters()[j] = null;
+                    }
+                    indexedPartition.getDirectory().remove(i);
+                    i--;
+                } 
+            }
+            return true;
+        } else {
+            throw new ExistenceException("No existe el archivo a eliminar");
+        }
+    }
+    
+    public boolean modifyFile(int idFile, int newSize) throws ExistenceException, WithoutSpaceException{
+        File file = searchFile(idFile);
+        if (file != null){
+            int oldsize = checkFileSizeOnDisk(idFile);
+            int freeSpace = freeSpace();
+            int spaceRequired = spaceRequired(newSize);
+            if (spaceRequired >= (oldsize + freeSpace)){
+                deleteFile(idFile);
+                createFile(idFile, newSize);
+            } else {
+                throw new WithoutSpaceException("No existe Espacio para guardar las modificaciones");
+            }
+        } else {
+            throw new ExistenceException("No existe el archivo a modificar");
+        }
+        return true;
+    }
+    
+    
+    
+    
 }
