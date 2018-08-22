@@ -164,4 +164,27 @@ public class MetodosInterfaz {
         return texto;
     }
 
+    
+    public File NuevoDocumentoConExtencion(String extencion, String cadena) throws IOException {
+        
+        File file = null;
+        JFileChooser fileChooser2 = new JFileChooser();
+        fileChooser2.setApproveButtonText("Guardar");
+        fileChooser2.showSaveDialog(null);
+        if (fileChooser2.getSelectedFile() != null) {
+            file = new File(fileChooser2.getSelectedFile() + extencion);
+            FileWriter fileWriter = new FileWriter(file);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            bufferedWriter.write(cadena);
+            bufferedWriter.close();
+            fileWriter.close();
+
+            bufferedWriter.close();
+            fileWriter.close();
+            JOptionPane.showMessageDialog(null, "\nEl archivo se a creado correctamente. ", "ADVERTENCIA!!!", JOptionPane.WARNING_MESSAGE);
+        }
+        return file;
+    }
+
 }

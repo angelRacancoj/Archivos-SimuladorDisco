@@ -52,8 +52,6 @@ public class CrearArchivoFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        nombreFormattedTextField = new javax.swing.JFormattedTextField();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         textoTextArea = new javax.swing.JTextArea();
@@ -63,11 +61,7 @@ public class CrearArchivoFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Crear Archivo");
 
-        jLabel1.setText("Ingrese el nombre (codigo):");
-
-        nombreFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-
-        jLabel2.setText("Ingrese la informacion:");
+        jLabel2.setText("Ingrese el texto:");
 
         textoTextArea.setColumns(20);
         textoTextArea.setRows(5);
@@ -94,11 +88,8 @@ public class CrearArchivoFrame extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(nombreFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel2)
+                .addContainerGap(508, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(78, 78, 78)
                 .addComponent(jButton1)
@@ -109,11 +100,7 @@ public class CrearArchivoFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nombreFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(17, 17, 17)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -128,28 +115,44 @@ public class CrearArchivoFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
         try {
+            /**
+             * este metodo devulve el file del archivo creado con esxtencion
+             * .bin
+             */
+            File newFile = metodosInterfaz.NuevoDocumentoConExtencion(".bin", textoTextArea.getText());
 
-            File newFile = metodosInterfaz.Guardar(nombreFormattedTextField.getText(), textoTextArea.getText());
-            switch (partition) {
-                case 1:
-                    break;
-                case 2:
-                    frame.getLinkedP().insert(newFile);
-                    break;
-                case 3:
-                    break;
-                default:
-                    JOptionPane.showMessageDialog(null, "\nOpcion de disco Incorrecta. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
-                    break;
-            }
-
-            this.setVisible(false);
-            frame.setVisible(true);
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "\nError al guardar el archivo. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
-            System.out.println("en guardar el archivo");
+            Logger.getLogger(CrearArchivoFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        this.setVisible(false);
+        frame.setVisible(true);
+
+//        try {
+//
+//            File newFile = metodosInterfaz.Guardar(nombreFormattedTextField.getText(), textoTextArea.getText());
+//            switch (partition) {
+//                case 1:
+//                    break;
+//                case 2:
+//                    frame.getLinkedP().insert(newFile);
+//                    break;
+//                case 3:
+//                    break;
+//                default:
+//                    JOptionPane.showMessageDialog(null, "\nOpcion de disco Incorrecta. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
+//                    break;
+//            }
+//
+//            this.setVisible(false);
+//            frame.setVisible(true);
+//        } catch (IOException ex) {
+//            JOptionPane.showMessageDialog(null, "\nError al guardar el archivo. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
+//            System.out.println("en guardar el archivo");
+//        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
@@ -161,10 +164,8 @@ public class CrearArchivoFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelarButton;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JFormattedTextField nombreFormattedTextField;
     private javax.swing.JTextArea textoTextArea;
     // End of variables declaration//GEN-END:variables
 }
