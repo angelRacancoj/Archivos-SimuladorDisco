@@ -6,6 +6,7 @@
 package GUI.frontend.pantallas;
 
 import Exceptions.ExistenceException;
+import Exceptions.WithoutSpaceException;
 import GUI.backend.MetodosInterfaz;
 import GUI.frontend.PrincipalFrame;
 import java.io.File;
@@ -143,7 +144,7 @@ public class ModificarArchivoFrame extends javax.swing.JFrame {
                     frame.getLinkedP().modifyFile(newFile);
                     break;
                 case 3:
-                    JOptionPane.showMessageDialog(null, "\nEsta opcion no esta disponible", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
+                    frame.getIndexP().modifyFile(Integer.getInteger(newFile.getName()), (int) (newFile.length() / 1024));
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "\nOpcion de disco Incorrecta. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
@@ -155,6 +156,8 @@ public class ModificarArchivoFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "\nError al guardar el archivo. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
             System.out.println("en guardar el archivo");
 
+        } catch (ExistenceException | WithoutSpaceException ex) {
+            JOptionPane.showMessageDialog(null, "\nError: " + ex, "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_saveChangesButtonActionPerformed
 

@@ -102,28 +102,33 @@ public class EliminarArchivoFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
-        if (!idArchivoEliminarTextField.getText().isEmpty()) {
+        try {
+            if (!idArchivoEliminarTextField.getText().isEmpty()) {
 
-            switch (partition) {
-                case 1:
-                    break;
-                case 2:
-                    frame.getLinkedP().deleteFile(Integer.getInteger(idArchivoEliminarTextField.getText()));
-                    break;
-                case 3:
-//                    frame.getIndexP().
-                    JOptionPane.showMessageDialog(null, "\nEste metodo no esta disponible", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
-                    break;
-                default:
-                    JOptionPane.showMessageDialog(null, "\nOpcion de disco Incorrecta. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
-                    break;
+                switch (partition) {
+                    case 1:
+                        break;
+                    case 2:
+                        frame.getLinkedP().deleteFile(Integer.getInteger(idArchivoEliminarTextField.getText()));
+                        break;
+                    case 3:
+                        frame.getIndexP().deleteFile(Integer.getInteger(idArchivoEliminarTextField.getText()));
+//                    JOptionPane.showMessageDialog(null, "\nEste metodo no esta disponible", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "\nOpcion de disco Incorrecta. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
+                        break;
+                }
+                JOptionPane.showMessageDialog(null, "\nEl archivo se a eliminado correctamente. ", "ADVERTENCIA!!!", JOptionPane.INFORMATION_MESSAGE);
+                this.setVisible(false);
+                frame.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "\nDebe llenar todos los campos. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
             }
-            JOptionPane.showMessageDialog(null, "\nEl archivo se a eliminado correctamente. ", "ADVERTENCIA!!!", JOptionPane.INFORMATION_MESSAGE);
-            this.setVisible(false);
-            frame.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "\nDebe llenar todos los campos. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "\nError: " + e, "ADVERTENCIA!!!", JOptionPane.INFORMATION_MESSAGE);
         }
+
     }//GEN-LAST:event_borrarButtonActionPerformed
 
     private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed

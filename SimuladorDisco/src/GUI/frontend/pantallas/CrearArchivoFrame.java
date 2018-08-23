@@ -123,7 +123,7 @@ public class CrearArchivoFrame extends javax.swing.JFrame {
              * este metodo devulve el file del archivo creado con esxtencion
              * .bin
              */
-            File newFile = metodosInterfaz.NuevoDocumentoConExtencion(".bin", textoTextArea.getText());
+            File newFile = metodosInterfaz.NuevoDocumentoConExtencion("", textoTextArea.getText());
 
             switch (partition) {
                 case 1:
