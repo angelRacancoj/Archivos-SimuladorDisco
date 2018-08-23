@@ -14,6 +14,16 @@ import java.util.Calendar;
  */
 public class Constants {
 
+    //Constantes utilizadas para el estado de un bloque indexado
+    public static final int FREE = 0;
+    public static final int OCCUPIED = 1;
+    public static final int INDEX = 2;
+    public static final int DATA = 3;
+    
+    //Punteros que almacenara el un bloque indice (Asignacion indexada)
+    public static final int POINTERS_PER_BLOCK = 10;
+    
+    public static final int BLOCK_PER_LINE_REPORT = 5;
     private final String DateTimeFormat = "dd-MM-yyyy HH:mm:ss";
 
     public final int PARTICION_INDEXADA = 3;

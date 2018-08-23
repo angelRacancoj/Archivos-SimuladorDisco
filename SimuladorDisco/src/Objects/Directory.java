@@ -5,6 +5,7 @@ package Objects;
  * @author teodoro
  */
 public class Directory {
+
     private int file;
     private int position;
 
@@ -28,5 +29,5 @@ public class Directory {
     public void setPosition(int position) {
         this.position = position;
     }
-    
+
 }

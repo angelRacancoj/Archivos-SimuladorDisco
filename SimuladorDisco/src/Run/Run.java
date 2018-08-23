@@ -24,5 +24,4 @@ public class Run {
         InicioFrame inicioFrame = new InicioFrame();
         inicioFrame.setVisible(true);
     }
-
 }
