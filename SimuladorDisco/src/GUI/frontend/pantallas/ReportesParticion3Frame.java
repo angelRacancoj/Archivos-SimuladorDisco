@@ -18,11 +18,11 @@ import javax.swing.JFrame;
 public class ReportesParticion3Frame extends javax.swing.JFrame {
 
     PrincipalFrame frame;
-    String reporte;
+    int particion;
 
-    public ReportesParticion3Frame(PrincipalFrame frame, String reporte) {
+    public ReportesParticion3Frame(PrincipalFrame frame, int particion) {
         this.frame = frame;
-        this.reporte = reporte;
+        this.particion = particion;
 
         initComponents();
     }
@@ -107,7 +107,17 @@ public class ReportesParticion3Frame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            reporteTextArea.setText(frame.getIndexP().blockReport((int) jSpinner1.getValue()));
+            switch (particion) {
+                case 1:
+                    break;
+                case 2:
+//                    reporteTextArea.setText(frame.getLinkedP().(int) jSpinner1.getValue()));
+                    break;
+                case 3:
+                    reporteTextArea.setText(frame.getIndexP().blockReport((int) jSpinner1.getValue()));
+                    break;
+            }
+
         } catch (OutOfRangeException ex) {
             Logger.getLogger(ReportesParticion3Frame.class.getName()).log(Level.SEVERE, null, ex);
         }

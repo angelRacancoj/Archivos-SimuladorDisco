@@ -521,7 +521,7 @@ public class PrincipalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_reporteBloquesMenuItemActionPerformed
 
     private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
-        ReportesParticion3Frame reportesFrame = new ReportesParticion3Frame(this, "NADA PERRO");
+        ReportesParticion3Frame reportesFrame = new ReportesParticion3Frame(this, constantSD.PARTICION_INDEXADA);
         reportesFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jMenuItem22ActionPerformed
