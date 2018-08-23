@@ -11,6 +11,8 @@ import GUI.frontend.pantallas.ConsultarArchivoFrame;
 import GUI.frontend.pantallas.CrearArchivoFrame;
 import GUI.frontend.pantallas.EliminarArchivoFrame;
 import GUI.frontend.pantallas.ModificarArchivoFrame;
+import GUI.frontend.pantallas.ReportesFrame;
+import GUI.frontend.pantallas.ReportesParticion3Frame;
 import java.io.File;
 import javax.swing.JOptionPane;
 import partitions.Linked;
@@ -354,9 +356,19 @@ public class PrincipalFrame extends javax.swing.JFrame {
         jMenu2.setText("Particion 1");
 
         jMenuItem17.setText("Estado de bloques");
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem17);
 
         jMenuItem18.setText("Contenido de bloques");
+        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem18ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem18);
 
         jMenu7.add(jMenu2);
@@ -384,6 +396,11 @@ public class PrincipalFrame extends javax.swing.JFrame {
         jMenu9.setText("Particion 3");
 
         jMenuItem21.setText("Reporte de directorio");
+        jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem21ActionPerformed(evt);
+            }
+        });
         jMenu9.add(jMenuItem21);
 
         jMenuItem22.setText("Reporte de bloques ");
@@ -399,6 +416,11 @@ public class PrincipalFrame extends javax.swing.JFrame {
         jMenu10.setText("MBR");
 
         jMenuItem23.setText("Informacion del MBR");
+        jMenuItem23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem23ActionPerformed(evt);
+            }
+        });
         jMenu10.add(jMenuItem23);
 
         jMenu7.add(jMenu10);
@@ -434,16 +456,16 @@ public class PrincipalFrame extends javax.swing.JFrame {
                         .addGap(162, 162, 162)
                         .addComponent(porcentajeParticionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(262, 262, 262)
-                        .addComponent(memoriaParticionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(memoriaParticionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
-                        .addGap(261, 261, 261)
+                        .addGap(305, 305, 305)
                         .addComponent(jLabel3)
-                        .addGap(430, 430, 430))))
+                        .addGap(386, 386, 386))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -490,11 +512,15 @@ public class PrincipalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_modificarP1MenuItemActionPerformed
 
     private void reporteBloquesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteBloquesMenuItemActionPerformed
-        // TODO add your handling code here:
+        ReportesFrame reportesFrame = new ReportesFrame(this, "ACA TENDRIA QUE IR EL STRING DEL REPORTE");
+        reportesFrame.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_reporteBloquesMenuItemActionPerformed
 
     private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
-        // TODO add your handling code here:
+        ReportesParticion3Frame reportesFrame = new ReportesParticion3Frame(this, "ACA TENDRIA QUE IR EL STRING DEL REPORTE");
+        reportesFrame.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jMenuItem22ActionPerformed
 
     private void primerAjusteMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_primerAjusteMenuItemActionPerformed
@@ -628,8 +654,43 @@ public class PrincipalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void reporteDirectorioMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteDirectorioMenuItemActionPerformed
-        // TODO add your handling code here:
+        ReportesFrame reportesFrame = new ReportesFrame(this, "ACA TENDRIA QUE IR EL STRING DEL REPORTE");
+        reportesFrame.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_reporteDirectorioMenuItemActionPerformed
+
+    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
+        ReportesFrame reportesFrame = new ReportesFrame(this, "ACA TENDRIA QUE IR EL STRING DEL REPORTE");
+        reportesFrame.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem17ActionPerformed
+
+    private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
+        ReportesFrame reportesFrame = new ReportesFrame(this, "ACA TENDRIA QUE IR EL STRING DEL REPORTE");
+        reportesFrame.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem18ActionPerformed
+
+    private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
+        ReportesFrame reportesFrame = new ReportesFrame(this, "ACA TENDRIA QUE IR EL STRING DEL REPORTE");
+        reportesFrame.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem21ActionPerformed
+
+    private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
+
+        nombreParticionTextField.setText(particion1Button.getText());
+        porcentajeParticionTextField.setText(Integer.toString(particion1Porcenaje));
+        memoriaParticionTextField.setText(String.valueOf(memoria * particion1Porcenaje * 0.01));
+
+        ReportesFrame reportesFrame = new ReportesFrame(this,
+                particion1Button.getText() + ": \n     Porcentaje de la particion: " + Integer.toString(particion1Porcenaje) + "\n     Espacio total de la particion: " + String.valueOf(memoria * particion1Porcenaje * 0.01) + " MB\n"
+                + particion2Button.getText() + ": \n     Porcentaje de la particion: " + Integer.toString(particion2Porcenaje) + "\n     Espacio total de la particion: " + String.valueOf(memoria * particion2Porcenaje * 0.01) + " MB\n"
+                + particion3Button.getText() + ": \n     Porcentaje de la particion: " + Integer.toString(particion3Porcenaje) + "\n     Espacio total de la particion: " + String.valueOf(memoria * particion3Porcenaje * 0.01) + " MB\n"
+        );
+        reportesFrame.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem23ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton colorButton;
