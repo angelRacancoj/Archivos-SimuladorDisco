@@ -5,7 +5,12 @@
  */
 package GUI.frontend;
 
+import Exceptions.OutOfRangeException;
 import GUI.backend.MetodosInterfaz;
+import Handlers.Indexed_Handler;
+import java.awt.HeadlessException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import partitions.Linked;
 
@@ -25,6 +30,7 @@ public class InicioFrame extends javax.swing.JFrame {
     int pixelesParticion3 = 0;
 //    int p2 = 0;
     Linked linkedP;
+    Indexed_Handler IndexP = new Indexed_Handler();
 
     public InicioFrame() {
         initComponents();
@@ -350,21 +356,28 @@ public class InicioFrame extends javax.swing.JFrame {
 
     private void crearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearButtonActionPerformed
 
-        if (!nombreDiscoTextField.getText().isEmpty() && (int) diskSizeSpinner.getValue() > 0 && (int) bloqueP1SizeSpinner.getValue() > 0
-                && (int) bloqueP2SizeSpinner.getValue() > 0 && (int) bloqueP3SizeSpinner.getValue() > 0) {
+        try {
+            if (!nombreDiscoTextField.getText().isEmpty() && (int) diskSizeSpinner.getValue() > 0 && (int) bloqueP1SizeSpinner.getValue() > 0
+                    && (int) bloqueP2SizeSpinner.getValue() > 0 && (int) bloqueP3SizeSpinner.getValue() > 0) {
 
 //            p2 = (int) ((Double.parseDouble(particion2TextField.getText()) / 100) * ((int) diskSizeSpinner.getValue()));
-            linkedP = new Linked((int) ((Double.parseDouble(particion2TextField.getText()) / 100)
-                    * ((int) diskSizeSpinner.getValue())), (int) bloqueP2SizeSpinner.getValue());
+                linkedP = new Linked((int) ((Double.parseDouble(particion2TextField.getText()) / 100)
+                        * ((int) diskSizeSpinner.getValue())), (int) bloqueP2SizeSpinner.getValue());
 
-            frame = new PrincipalFrame(Integer.parseInt(particion1TextField.getText()), Integer.parseInt(particion2TextField.getText()),
-                    Integer.parseInt(particion3TextField.getText()), (int) diskSizeSpinner.getValue(), linkedP);
-            JOptionPane.showMessageDialog(null, "\nDisco montado correctamente. ", "ADVERTENCIA!!!", JOptionPane.INFORMATION_MESSAGE);
+                IndexP.createPartition((int) ((Double.parseDouble(particion3TextField.getText()) / 100)
+                        * ((int) diskSizeSpinner.getValue())), (int) bloqueP3SizeSpinner.getValue());
 
-            frame.setVisible(true);
-            this.setVisible(false);
-        } else {
-            JOptionPane.showMessageDialog(null, "\nTodos los campos deben estar llenos. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
+                frame = new PrincipalFrame(Integer.parseInt(particion1TextField.getText()), Integer.parseInt(particion2TextField.getText()),
+                        Integer.parseInt(particion3TextField.getText()), (int) diskSizeSpinner.getValue(), linkedP, IndexP);
+                JOptionPane.showMessageDialog(null, "\nDisco montado correctamente. ", "ADVERTENCIA!!!", JOptionPane.INFORMATION_MESSAGE);
+
+                frame.setVisible(true);
+                this.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "\nTodos los campos deben estar llenos. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (OutOfRangeException | HeadlessException | NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "\nError: " + e, "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_crearButtonActionPerformed
 

@@ -6,6 +6,8 @@
 package GUI.frontend.pantallas;
 
 import Constants.Constants;
+import Exceptions.ExistenceException;
+import Exceptions.WithoutSpaceException;
 import GUI.backend.MetodosInterfaz;
 import GUI.frontend.PrincipalFrame;
 import errores.InputsVaciosException;
@@ -123,7 +125,21 @@ public class CrearArchivoFrame extends javax.swing.JFrame {
              */
             File newFile = metodosInterfaz.NuevoDocumentoConExtencion(".bin", textoTextArea.getText());
 
-        } catch (IOException ex) {
+            switch (partition) {
+                case 1:
+                    break;
+                case 2:
+                    frame.getLinkedP().insert(newFile);
+                    break;
+                case 3:
+                    frame.getIndexP().createFile(Integer.valueOf(newFile.getName()), (int) newFile.length());
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "\nOpcion de disco Incorrecta. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
+                    break;
+            }
+
+        } catch (IOException | WithoutSpaceException | ExistenceException ex) {
             Logger.getLogger(CrearArchivoFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -152,7 +168,6 @@ public class CrearArchivoFrame extends javax.swing.JFrame {
 //            JOptionPane.showMessageDialog(null, "\nError al guardar el archivo. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
 //            System.out.println("en guardar el archivo");
 //        }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed

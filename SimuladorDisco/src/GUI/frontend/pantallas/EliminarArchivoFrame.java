@@ -111,6 +111,7 @@ public class EliminarArchivoFrame extends javax.swing.JFrame {
                     frame.getLinkedP().deleteFile(Integer.getInteger(idArchivoEliminarTextField.getText()));
                     break;
                 case 3:
+                    JOptionPane.showMessageDialog(null, "\nEste metodo no esta disponible", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "\nOpcion de disco Incorrecta. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);

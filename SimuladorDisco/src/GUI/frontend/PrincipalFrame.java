@@ -13,6 +13,7 @@ import GUI.frontend.pantallas.EliminarArchivoFrame;
 import GUI.frontend.pantallas.ModificarArchivoFrame;
 import GUI.frontend.pantallas.ReportesFrame;
 import GUI.frontend.pantallas.ReportesParticion3Frame;
+import Handlers.Indexed_Handler;
 import java.io.File;
 import javax.swing.JOptionPane;
 import partitions.Linked;
@@ -33,9 +34,10 @@ public class PrincipalFrame extends javax.swing.JFrame {
     int particion3Porcenaje;
     int memoria;
     Linked linkedP;
+    Indexed_Handler IndexP;
     Constants constantSD = new Constants();
 
-    public PrincipalFrame(int particion1Porcenaje, int particion2Porcenaje, int particion3Porcenaje, int memoria, Linked linkedP) {
+    public PrincipalFrame(int particion1Porcenaje, int particion2Porcenaje, int particion3Porcenaje, int memoria, Linked linkedP, Indexed_Handler IndexP) {
 
         this.metodosInterfaz = new MetodosInterfaz();
         this.particion1Porcenaje = particion1Porcenaje;
@@ -46,6 +48,7 @@ public class PrincipalFrame extends javax.swing.JFrame {
         this.setLayout(null);
         mbrButton.setBounds(0, 0, 280, 300);
         this.linkedP = linkedP;
+        this.IndexP = IndexP;
 
         int pixeles1 = (particion1Porcenaje / 100) * 1000;
         int pixeles2 = (particion2Porcenaje / 100) * 1000;
@@ -518,7 +521,7 @@ public class PrincipalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_reporteBloquesMenuItemActionPerformed
 
     private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
-        ReportesParticion3Frame reportesFrame = new ReportesParticion3Frame(this, "ACA TENDRIA QUE IR EL STRING DEL REPORTE");
+        ReportesParticion3Frame reportesFrame = new ReportesParticion3Frame(this, "NADA PERRO");
         reportesFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jMenuItem22ActionPerformed
@@ -654,7 +657,7 @@ public class PrincipalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void reporteDirectorioMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteDirectorioMenuItemActionPerformed
-        ReportesFrame reportesFrame = new ReportesFrame(this, "ACA TENDRIA QUE IR EL STRING DEL REPORTE");
+        ReportesFrame reportesFrame = new ReportesFrame(this, IndexP.directoryReport());
         reportesFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_reporteDirectorioMenuItemActionPerformed
@@ -672,7 +675,7 @@ public class PrincipalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem18ActionPerformed
 
     private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
-        ReportesFrame reportesFrame = new ReportesFrame(this, "ACA TENDRIA QUE IR EL STRING DEL REPORTE");
+        ReportesFrame reportesFrame = new ReportesFrame(this, IndexP.directoryReport());
         reportesFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jMenuItem21ActionPerformed
@@ -750,6 +753,14 @@ public class PrincipalFrame extends javax.swing.JFrame {
 
     public void setLinkedP(Linked linkedP) {
         this.linkedP = linkedP;
+    }
+
+    public Indexed_Handler getIndexP() {
+        return IndexP;
+    }
+
+    public void setIndexP(Indexed_Handler IndexP) {
+        this.IndexP = IndexP;
     }
 
 }

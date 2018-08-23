@@ -5,10 +5,13 @@
  */
 package GUI.frontend.pantallas;
 
+import Exceptions.ExistenceException;
 import GUI.backend.MetodosInterfaz;
 import GUI.frontend.PrincipalFrame;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -140,6 +143,7 @@ public class ModificarArchivoFrame extends javax.swing.JFrame {
                     frame.getLinkedP().modifyFile(newFile);
                     break;
                 case 3:
+                    JOptionPane.showMessageDialog(null, "\nEsta opcion no esta disponible", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "\nOpcion de disco Incorrecta. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);

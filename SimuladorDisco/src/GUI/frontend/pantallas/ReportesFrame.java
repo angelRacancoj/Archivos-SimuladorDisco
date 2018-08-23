@@ -13,9 +13,9 @@ import javax.swing.JFrame;
  */
 public class ReportesFrame extends javax.swing.JFrame {
 
-    
     JFrame frame;
     String reporte;
+
     public ReportesFrame(JFrame frame, String reporte) {
         this.frame = frame;
         this.reporte = reporte;
@@ -103,7 +103,6 @@ public class ReportesFrame extends javax.swing.JFrame {
         frame.setVisible(true);
     }//GEN-LAST:event_cancelarButtonActionPerformed
 
-   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelarButton;
     private javax.swing.JButton jButton1;

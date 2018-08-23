@@ -5,6 +5,10 @@
  */
 package GUI.frontend.pantallas;
 
+import Exceptions.OutOfRangeException;
+import GUI.frontend.PrincipalFrame;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -13,10 +17,10 @@ import javax.swing.JFrame;
  */
 public class ReportesParticion3Frame extends javax.swing.JFrame {
 
-    JFrame frame;
+    PrincipalFrame frame;
     String reporte;
 
-    public ReportesParticion3Frame(JFrame frame, String reporte) {
+    public ReportesParticion3Frame(PrincipalFrame frame, String reporte) {
         this.frame = frame;
         this.reporte = reporte;
 
@@ -102,14 +106,17 @@ public class ReportesParticion3Frame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        reporteTextArea.setText(reporte);
+        try {
+            reporteTextArea.setText(frame.getIndexP().blockReport((int) jSpinner1.getValue()));
+        } catch (OutOfRangeException ex) {
+            Logger.getLogger(ReportesParticion3Frame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
         this.setVisible(false);
         frame.setVisible(true);
     }//GEN-LAST:event_cancelarButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelarButton;
