@@ -139,12 +139,18 @@ public class ModificarArchivoFrame extends javax.swing.JFrame {
 
             switch (partition) {
                 case 1:
+                    frame.getContiguaP().modificarPrimerAjuste(newFile.getName(), String.valueOf((newFile.length() / 1024)));
                     break;
                 case 2:
                     frame.getLinkedP().modifyFile(newFile);
                     break;
                 case 3:
                     frame.getIndexP().modifyFile(Integer.getInteger(newFile.getName()), (int) (newFile.length() / 1024));
+                    break;
+                case 4:
+//                    frame.getContiguaP().
+                    break;
+                case 5:
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "\nOpcion de disco Incorrecta. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);

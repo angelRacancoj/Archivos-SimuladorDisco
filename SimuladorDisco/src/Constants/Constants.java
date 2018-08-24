@@ -19,15 +19,15 @@ public class Constants {
     public static final int OCCUPIED = 1;
     public static final int INDEX = 2;
     public static final int DATA = 3;
-    
+
     //Punteros que almacenara el un bloque indice (Asignacion indexada)
     public static final int POINTERS_PER_BLOCK = 10;
-    
+
     public static final int BLOCK_PER_LINE_REPORT = 5;
     private final String DateTimeFormat = "dd-MM-yyyy HH:mm:ss";
 
     public final int PARTICION_INDEXADA = 3;
-    public final int PARTICION_CONTIGUA = 1;
+//    public final int PARTICION_CONTIGUA = 1;
     public final int PARTICION_ENLAZADA = 2;
 
     public final String LOG_PATH = "info.log";
@@ -39,6 +39,11 @@ public class Constants {
     public final String OP_CREAR = "CREATE";
     public final String OP_MODIFICAR = "MODIFY";
     public final String OP_ELIMINAR = "ELIMINATE";
+
+//    public final int NO_CONTIGUA = 0;
+    public final int PRIMER_CONTIGUA = 1;
+    public final int MEJOR_CONTIGUA = 4;
+    public final int PEOR_CONTIGUA = 5;
 
     /**
      * Use Calendar to get the actual date and time at the machine

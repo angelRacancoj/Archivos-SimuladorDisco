@@ -109,6 +109,7 @@ public class ReportesParticion3Frame extends javax.swing.JFrame {
         try {
             switch (particion) {
                 case 1:
+                    reporteTextArea.setText(frame.getContiguaP().reporteUno(String.valueOf(jSpinner1.getValue())));
                     break;
                 case 2:
 //                    reporteTextArea.setText(frame.getLinkedP().(int) jSpinner1.getValue()));

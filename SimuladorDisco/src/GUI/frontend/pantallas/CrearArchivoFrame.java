@@ -127,16 +127,24 @@ public class CrearArchivoFrame extends javax.swing.JFrame {
 
             switch (partition) {
                 case 1:
+                    frame.getContiguaP().primerAjuste(newFile.getName(), String.valueOf(newFile.length() / 1024));
                     break;
                 case 2:
                     frame.getLinkedP().insert(newFile);
                     break;
                 case 3:
-                    frame.getIndexP().createFile(Integer.valueOf(newFile.getName()), (int) newFile.length());
+                    frame.getIndexP().createFile(Integer.valueOf(newFile.getName()), (int) newFile.length() / 1024);
+                    break;
+                case 4:
+//                    frame.getContiguaP().
+                    break;
+                case 5:
+//                    frame.getContiguaP().
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "\nOpcion de disco Incorrecta. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
                     break;
+
             }
 
         } catch (IOException | WithoutSpaceException | ExistenceException ex) {

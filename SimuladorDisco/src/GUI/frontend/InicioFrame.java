@@ -8,9 +8,8 @@ package GUI.frontend;
 import Exceptions.OutOfRangeException;
 import GUI.backend.MetodosInterfaz;
 import Handlers.Indexed_Handler;
+import asignacionContigua.manejadorAsignacionContigua;
 import java.awt.HeadlessException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import partitions.Linked;
 
@@ -28,9 +27,9 @@ public class InicioFrame extends javax.swing.JFrame {
     int pixelesParticion1 = 0;
     int pixelesParticion2 = 0;
     int pixelesParticion3 = 0;
-//    int p2 = 0;
     Linked linkedP;
     Indexed_Handler IndexP = new Indexed_Handler();
+    manejadorAsignacionContigua contiguaP = new manejadorAsignacionContigua();
 
     public InicioFrame() {
         initComponents();
@@ -367,8 +366,11 @@ public class InicioFrame extends javax.swing.JFrame {
                 IndexP.createPartition((int) ((Double.parseDouble(particion3TextField.getText()) / 100)
                         * ((int) diskSizeSpinner.getValue())), (int) bloqueP3SizeSpinner.getValue());
 
+                contiguaP.crearParticion(String.valueOf(((Double.parseDouble(particion1TextField.getText()) / 100)
+                        * ((int) diskSizeSpinner.getValue()))), String.valueOf(bloqueP1SizeSpinner.getValue()));
+
                 frame = new PrincipalFrame(Integer.parseInt(particion1TextField.getText()), Integer.parseInt(particion2TextField.getText()),
-                        Integer.parseInt(particion3TextField.getText()), (int) diskSizeSpinner.getValue(), linkedP, IndexP);
+                        Integer.parseInt(particion3TextField.getText()), (int) diskSizeSpinner.getValue(), linkedP, IndexP, contiguaP);
                 JOptionPane.showMessageDialog(null, "\nDisco montado correctamente. ", "ADVERTENCIA!!!", JOptionPane.INFORMATION_MESSAGE);
 
                 frame.setVisible(true);

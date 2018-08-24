@@ -14,6 +14,7 @@ import GUI.frontend.pantallas.ModificarArchivoFrame;
 import GUI.frontend.pantallas.ReportesFrame;
 import GUI.frontend.pantallas.ReportesParticion3Frame;
 import Handlers.Indexed_Handler;
+import asignacionContigua.manejadorAsignacionContigua;
 import java.io.File;
 import javax.swing.JOptionPane;
 import partitions.Linked;
@@ -35,9 +36,11 @@ public class PrincipalFrame extends javax.swing.JFrame {
     int memoria;
     Linked linkedP;
     Indexed_Handler IndexP;
+    manejadorAsignacionContigua contiguaP;
     Constants constantSD = new Constants();
+    int ajusteContigua = 0;
 
-    public PrincipalFrame(int particion1Porcenaje, int particion2Porcenaje, int particion3Porcenaje, int memoria, Linked linkedP, Indexed_Handler IndexP) {
+    public PrincipalFrame(int particion1Porcenaje, int particion2Porcenaje, int particion3Porcenaje, int memoria, Linked linkedP, Indexed_Handler IndexP, manejadorAsignacionContigua contiguaP) {
 
         this.metodosInterfaz = new MetodosInterfaz();
         this.particion1Porcenaje = particion1Porcenaje;
@@ -49,6 +52,7 @@ public class PrincipalFrame extends javax.swing.JFrame {
         mbrButton.setBounds(0, 0, 280, 300);
         this.linkedP = linkedP;
         this.IndexP = IndexP;
+        this.contiguaP = contiguaP;
 
         int pixeles1 = (particion1Porcenaje / 100) * 1000;
         int pixeles2 = (particion2Porcenaje / 100) * 1000;
@@ -509,7 +513,8 @@ public class PrincipalFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void modificarP1MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarP1MenuItemActionPerformed
-        ModificarArchivoFrame archivoFrame = new ModificarArchivoFrame(this, constantSD.PARTICION_CONTIGUA);
+
+        ModificarArchivoFrame archivoFrame = new ModificarArchivoFrame(this, ajusteContigua);
         archivoFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_modificarP1MenuItemActionPerformed
@@ -528,6 +533,7 @@ public class PrincipalFrame extends javax.swing.JFrame {
 
     private void primerAjusteMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_primerAjusteMenuItemActionPerformed
         crearP1MenuItem.setEnabled(true);
+        ajusteContigua = constantSD.PRIMER_CONTIGUA;
         eliminarP1MenuItem.setEnabled(true);
         consultarP1MenuItem.setEnabled(true);
         modificarP1MenuItem.setEnabled(true);
@@ -535,6 +541,7 @@ public class PrincipalFrame extends javax.swing.JFrame {
 
     private void mejorAjusteMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mejorAjusteMenuItemActionPerformed
         crearP1MenuItem.setEnabled(true);
+        ajusteContigua = constantSD.MEJOR_CONTIGUA;
         eliminarP1MenuItem.setEnabled(true);
         consultarP1MenuItem.setEnabled(true);
         modificarP1MenuItem.setEnabled(true);
@@ -542,19 +549,20 @@ public class PrincipalFrame extends javax.swing.JFrame {
 
     private void peorAjusteMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_peorAjusteMenuItemActionPerformed
         crearP1MenuItem.setEnabled(true);
+        ajusteContigua = constantSD.PEOR_CONTIGUA;
         eliminarP1MenuItem.setEnabled(true);
         consultarP1MenuItem.setEnabled(true);
         modificarP1MenuItem.setEnabled(true);
     }//GEN-LAST:event_peorAjusteMenuItemActionPerformed
 
     private void crearP1MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearP1MenuItemActionPerformed
-        CrearArchivoFrame archivoInternalFrame = new CrearArchivoFrame(this, constantSD.PARTICION_CONTIGUA);
+        CrearArchivoFrame archivoInternalFrame = new CrearArchivoFrame(this, ajusteContigua);
         archivoInternalFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_crearP1MenuItemActionPerformed
 
     private void eliminarP1MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarP1MenuItemActionPerformed
-        EliminarArchivoFrame eliminarArchivoFrame = new EliminarArchivoFrame(this, constantSD.PARTICION_CONTIGUA);
+        EliminarArchivoFrame eliminarArchivoFrame = new EliminarArchivoFrame(this, constantSD.PRIMER_CONTIGUA);
         eliminarArchivoFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_eliminarP1MenuItemActionPerformed
@@ -663,13 +671,13 @@ public class PrincipalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_reporteDirectorioMenuItemActionPerformed
 
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
-        ReportesFrame reportesFrame = new ReportesFrame(this, "ACA TENDRIA QUE IR EL STRING DEL REPORTE");
+        ReportesParticion3Frame reportesFrame = new ReportesParticion3Frame(this, constantSD.PRIMER_CONTIGUA);
         reportesFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
-        ReportesFrame reportesFrame = new ReportesFrame(this, "ACA TENDRIA QUE IR EL STRING DEL REPORTE");
+        ReportesFrame reportesFrame = new ReportesFrame(this, contiguaP.reporteDos());
         reportesFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jMenuItem18ActionPerformed
@@ -761,6 +769,14 @@ public class PrincipalFrame extends javax.swing.JFrame {
 
     public void setIndexP(Indexed_Handler IndexP) {
         this.IndexP = IndexP;
+    }
+
+    public manejadorAsignacionContigua getContiguaP() {
+        return contiguaP;
+    }
+
+    public void setContiguaP(manejadorAsignacionContigua contiguaP) {
+        this.contiguaP = contiguaP;
     }
 
 }

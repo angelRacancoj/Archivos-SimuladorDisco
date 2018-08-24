@@ -107,6 +107,7 @@ public class EliminarArchivoFrame extends javax.swing.JFrame {
 
                 switch (partition) {
                     case 1:
+                        frame.getContiguaP().eliminarArchivo(idArchivoEliminarTextField.getText());
                         break;
                     case 2:
                         frame.getLinkedP().deleteFile(Integer.getInteger(idArchivoEliminarTextField.getText()));
