@@ -5,8 +5,14 @@
  */
 package GUI.frontend.pantallas;
 
+import Archivo.ManejadorArchivo;
+import Exceptions.ExistenceException;
 import GUI.backend.MetodosInterfaz;
-import javax.swing.JFrame;
+import GUI.frontend.PrincipalFrame;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,12 +23,15 @@ public class ConsultarArchivoFrame extends javax.swing.JFrame {
     /**
      * Creates new form ConsultarArchivoFrame
      */
-    JFrame frame;
+    PrincipalFrame frame;
     MetodosInterfaz metodosInterfaz;
+    int partition;
+    ManejadorArchivo archivos = new ManejadorArchivo();
 
-    public ConsultarArchivoFrame(JFrame frame) {
+    public ConsultarArchivoFrame(PrincipalFrame frame, int partition) {
         initComponents();
         this.frame = frame;
+        this.partition = partition;
     }
 
     /**
@@ -48,6 +57,11 @@ public class ConsultarArchivoFrame extends javax.swing.JFrame {
         jLabel1.setText("Ingrese el nombre:");
 
         nombreFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#########"))));
+        nombreFormattedTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreFormattedTextFieldActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Texto:");
 
@@ -118,8 +132,43 @@ public class ConsultarArchivoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelarButtonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        textoTextArea.setText(metodosInterfaz.AbrirBin());
+        try {
+
+            switch (partition) {
+                case 1:
+//                    frame.getContiguaP().primerAjuste(newFile.getName(), String.valueOf(newFile.length() / 1024));
+//                     textoTextArea.setText(frame.getContiguaP().);
+                    break;
+                case 2:
+                    textoTextArea.setText(archivos.lecturaArchivo(frame.getLinkedP().getFile(Integer.parseInt(nombreFormattedTextField.getText()))));
+//                    frame.getLinkedP().insert(newFile);
+                    break;
+                case 3:
+                    textoTextArea.setText(frame.getIndexP().consultSizeFile(Integer.parseInt(nombreFormattedTextField.getText())));
+//                    frame.getIndexP().createFile(Integer.valueOf(newFile.getName()), (int) newFile.length());
+                    break;
+                case 4:
+//                    frame.getContiguaP().
+                    break;
+                case 5:
+//                    frame.getContiguaP().
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "\nOpcion de disco Incorrecta. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
+                    break;
+
+            }
+
+        } catch (IOException | ExistenceException ex) {
+            Logger.getLogger(CrearArchivoFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+//        textoTextArea.setText(metodosInterfaz.AbrirBin());
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void nombreFormattedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreFormattedTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreFormattedTextFieldActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelarButton;

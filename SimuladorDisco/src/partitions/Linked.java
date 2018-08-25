@@ -45,7 +45,7 @@ public class Linked {
 
     public void formatDisk() {
         for (int i = 0; i < blocks.size(); i++) {
-            blocks.set(i, new BlockLinked(i, null, 0));
+            blocks.set(i, new BlockLinked(i, null, -3));
         }
     }
 
@@ -60,13 +60,13 @@ public class Linked {
     private void createBlocks(int size, int sizeBlocks) {
         int quantity = size / sizeBlocks;
         for (int i = 0; i < quantity; i++) {
-            this.blocks.add(new BlockLinked(i, null, 0));
+            this.blocks.add(new BlockLinked(i, null, -3));
         }
     }
 
     //metodo recursivo para insertar archvo
     private int insertFile(int index, int size) {
-        if (size == 0) {
+        if (size == 1) {
             if (isEmpty(index)) {
                 blocks.get(index).setData(null);
                 blocks.get(index).setPuntero(-1);
@@ -94,23 +94,40 @@ public class Linked {
      * @param file
      */
     public void insert(File file) {
-        //calcular la cantidad de bloques que usara el archivo
-        int size = (int) (file.getTotalSpace() / sizeBlocks);
-        boolean repeat = true;
-        int position = index();
-        if (space(size)) {
-            //agregamos el archivo a guardar en el directorio de archivos
-            directory.add(new Directory(Integer.parseInt(file.getName()), position));
-            while (repeat) {
-                if (isEmpty(position)) {
-                    //para no modificar el master no cambie el tipo de atributo para date pero ahi hay que mandar el path
-                    blocks.get(position).setData(file);
-                    blocks.get(position).setPuntero(insertFile(index(), size - 1));
-                    break;
-                } else {
-                    position = index();
-                }
+        if (getFile(Integer.parseInt(file.getName())) == null) {
+            //calcular la cantidad de bloques que usara el archivo
+            int size = (int) ((file.length() * 0.001) / blocks.size());
+            if (size == 0) {
+                size++;
             }
+            boolean repeat = true;
+            int position = index();
+            //Si existe espacio para insertar archivo
+            if (space(size)) {
+                //agregamos el archivo a guardar en el directorio de archivos
+                while (repeat) {
+                    if (isEmpty(position)) {
+                        //para no modificar el master no cambie el tipo de atributo para date pero ahi hay que mandar el path
+                        directory.add(new Directory(Integer.parseInt(file.getName()), position));
+                        if (size == 1) {
+                            blocks.get(position).setData(file);
+                            blocks.get(position).setPuntero(-1);
+                            break;
+                        } else {
+                            blocks.get(position).setData(file);
+                            blocks.get(position).setPuntero(-2);
+                            blocks.get(position).setPuntero(insertFile(index(), size - 1));
+                            break;
+                        }
+                    } else {
+                        position = index();
+                    }
+                }
+            } else {
+                //NO hay espacio
+            }
+        } else {
+            //Ya existe un archivo con ese nombre
         }
     }
 
@@ -120,7 +137,7 @@ public class Linked {
 
     private boolean isEmpty(int id) {
         boolean result = false;
-        if (blocks.get(id).getPuntero() == 0) {
+        if (blocks.get(id).getPuntero() == -3) {
             result = true;
         }
         return result;
@@ -152,15 +169,15 @@ public class Linked {
     }
 
     private void resetBlock(BlockLinked block) {
-        blocks.set(block.getId(), new BlockLinked(block.getId(), null, 0));
+        blocks.set(block.getId(), new BlockLinked(block.getId(), null, -3));
     }
 
-    private void delete(int puntero) {
+    private void delete(int antes, int puntero) {
         if (puntero != -1) {
-            delete(blocks.get(puntero).getPuntero());
+            delete(puntero, blocks.get(puntero).getPuntero());
             resetBlock(blocks.get(puntero));
         } else {
-            resetBlock(blocks.get(puntero));
+            resetBlock(blocks.get(antes));
         }
     }
 
@@ -172,7 +189,7 @@ public class Linked {
     public void deleteFile(int id) {
         Directory file = dataExist(id);
         if (file != null) {
-            delete(file.getPosition());
+            delete(file.getPosition(), file.getPosition());
             directory.remove(file);
         } else {
             //no existe el archivo
@@ -205,7 +222,11 @@ public class Linked {
         int val;
         if (dataExist(idFile) != null) {
             int index = dataExist(idFile).getPosition();
-            return 1 + sizeData(blocks.get(blocks.get(index).getPuntero()));
+            if (blocks.get(index).getPuntero() != -1) {
+                return 1 + sizeData(blocks.get(blocks.get(index).getPuntero()));
+            } else {
+                return 1;
+            }
         } else {
             //archivo no encontrado
             return -1;
@@ -227,7 +248,7 @@ public class Linked {
         int size = 0;
         boolean result = false;
         for (int i = 0; i < blocks.size(); i++) {
-            if (blocks.get(i).getPuntero() == 0) {
+            if (blocks.get(i).getPuntero() == -3) {
                 size++;
             }
             if (size >= sizeData) {
@@ -236,5 +257,29 @@ public class Linked {
             }
         }
         return result;
+    }
+
+    public String getReporte1() {
+        String contenido = "Archivo,Bloque inicial \n";
+        for (int i = 0; i < directory.size(); i++) {
+            contenido += directory.get(i).getFile() + "," + directory.get(i).getPosition() + "\n";
+        }
+        return contenido;
+    }
+
+    //se ingresa la cantidad de bloques a reportar
+    public String getReporte2(int cantidad) {
+        String contenido = "id Bloque,apuntador \n";
+        if (cantidad <= blocks.size()) {
+            for (int i = 0; i < cantidad; i++) {
+                contenido += blocks.get(i).getId() + "," + blocks.get(i).getPuntero() + "\n";
+            }
+        } else {
+            for (int i = 0; i < blocks.size(); i++) {
+                contenido += blocks.get(i).getId() + "," + blocks.get(i).getPuntero() + "\n";
+            }
+        }
+
+        return contenido;
     }
 }

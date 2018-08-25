@@ -70,6 +70,7 @@ public class InicioFrame extends javax.swing.JFrame {
         particion3TextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Creacion de Particiones");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -366,8 +367,8 @@ public class InicioFrame extends javax.swing.JFrame {
                 IndexP.createPartition((int) ((Double.parseDouble(particion3TextField.getText()) / 100)
                         * ((int) diskSizeSpinner.getValue())), (int) bloqueP3SizeSpinner.getValue());
 
-                contiguaP.crearParticion(String.valueOf(((Double.parseDouble(particion1TextField.getText()) / 100)
-                        * ((int) diskSizeSpinner.getValue()))), String.valueOf(bloqueP1SizeSpinner.getValue()));
+                contiguaP.crearParticion((int) ((Double.parseDouble(particion1TextField.getText()) / 100)
+                        * ((int) diskSizeSpinner.getValue())), (int) bloqueP1SizeSpinner.getValue());
 
                 frame = new PrincipalFrame(Integer.parseInt(particion1TextField.getText()), Integer.parseInt(particion2TextField.getText()),
                         Integer.parseInt(particion3TextField.getText()), (int) diskSizeSpinner.getValue(), linkedP, IndexP, contiguaP);

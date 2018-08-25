@@ -110,10 +110,10 @@ public class EliminarArchivoFrame extends javax.swing.JFrame {
                         frame.getContiguaP().eliminarArchivo(idArchivoEliminarTextField.getText());
                         break;
                     case 2:
-                        frame.getLinkedP().deleteFile(Integer.getInteger(idArchivoEliminarTextField.getText()));
+                        frame.getLinkedP().deleteFile(Integer.parseInt(idArchivoEliminarTextField.getText()));
                         break;
                     case 3:
-                        frame.getIndexP().deleteFile(Integer.getInteger(idArchivoEliminarTextField.getText()));
+                        frame.getIndexP().deleteFile(Integer.parseInt(idArchivoEliminarTextField.getText()));
 //                    JOptionPane.showMessageDialog(null, "\nEste metodo no esta disponible", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
                         break;
                     default:

@@ -5,25 +5,28 @@
  */
 package GUI.frontend.pantallas;
 
-import Exceptions.OutOfRangeException;
+import Exceptions.ExistenceException;
+import GUI.backend.MetodosInterfaz;
 import GUI.frontend.PrincipalFrame;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author daniel
  */
-public class ReportesParticion3Frame extends javax.swing.JFrame {
+public class ReportesFrame1 extends javax.swing.JFrame {
 
+    MetodosInterfaz metodosInterfaz;
     PrincipalFrame frame;
-    int particion;
+    int partition;
 
-    public ReportesParticion3Frame(PrincipalFrame frame, int particion) {
+    public ReportesFrame1(PrincipalFrame frame, int partition) {
         this.frame = frame;
-        this.particion = particion;
-
+        this.partition = partition;
         initComponents();
     }
 
@@ -36,18 +39,21 @@ public class ReportesParticion3Frame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
-        reporteTextArea = new javax.swing.JTextArea();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         cancelarButton = new javax.swing.JButton();
-        jSpinner1 = new javax.swing.JSpinner();
-        jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        reporteTextArea = new javax.swing.JTextArea();
+
+        jButton2.setText("jButton2");
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        reporteTextArea.setColumns(20);
-        reporteTextArea.setRows(5);
-        jScrollPane2.setViewportView(reporteTextArea);
 
         jButton1.setText("Ver Reporte");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -63,7 +69,9 @@ public class ReportesParticion3Frame extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Cantidad de bloques:");
+        reporteTextArea.setColumns(20);
+        reporteTextArea.setRows(5);
+        jScrollPane2.setViewportView(reporteTextArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,25 +82,16 @@ public class ReportesParticion3Frame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
                         .addComponent(cancelarButton))
-                    .addComponent(jScrollPane2)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(59, 59, 59)
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 245, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane2))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -104,21 +103,28 @@ public class ReportesParticion3Frame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            switch (particion) {
-                case 1:
-                    reporteTextArea.setText(frame.getContiguaP().reporteUno(String.valueOf(jSpinner1.getValue())));
-                    break;
-                case 2:
-//                    reporteTextArea.setText(frame.getLinkedP().(int) jSpinner1.getValue()));
-                    break;
-                case 3:
-                    reporteTextArea.setText(frame.getIndexP().blockReport((int) jSpinner1.getValue()));
-                    break;
-            }
+        switch (partition) {
+            case 1:
+//                    frame.getContiguaP().primerAjuste(newFile.getName(), String.valueOf(newFile.length() / 1024));
+//                     textoTextArea.setText(frame.getContiguaP().);
+                break;
+            case 2:
+                this.reporteTextArea.setText(frame.getLinkedP().getReporte1());
+                break;
+            case 3:
+                reporteTextArea.setText(frame.getIndexP().directoryReport());
+//                    frame.getIndexP().createFile(Integer.valueOf(newFile.getName()), (int) newFile.length());
+                break;
+            case 4:
+//                    frame.getContiguaP().
+                break;
+            case 5:
+//                    frame.getContiguaP().
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "\nOpcion de disco Incorrecta. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
+                break;
 
-        } catch (OutOfRangeException ex) {
-            Logger.getLogger(ReportesParticion3Frame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -130,9 +136,10 @@ public class ReportesParticion3Frame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelarButton;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea reporteTextArea;
     // End of variables declaration//GEN-END:variables
 }

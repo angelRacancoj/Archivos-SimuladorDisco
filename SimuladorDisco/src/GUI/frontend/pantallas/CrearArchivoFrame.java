@@ -133,7 +133,7 @@ public class CrearArchivoFrame extends javax.swing.JFrame {
                     frame.getLinkedP().insert(newFile);
                     break;
                 case 3:
-                    frame.getIndexP().createFile(Integer.valueOf(newFile.getName()), (int) newFile.length() / 1024);
+                    frame.getIndexP().createFile(Integer.valueOf(newFile.getName()), (int) newFile.length());
                     break;
                 case 4:
 //                    frame.getContiguaP().
@@ -153,29 +153,6 @@ public class CrearArchivoFrame extends javax.swing.JFrame {
 
         this.setVisible(false);
         frame.setVisible(true);
-
-//        try {
-//
-//            File newFile = metodosInterfaz.Guardar(nombreFormattedTextField.getText(), textoTextArea.getText());
-//            switch (partition) {
-//                case 1:
-//                    break;
-//                case 2:
-//                    frame.getLinkedP().insert(newFile);
-//                    break;
-//                case 3:
-//                    break;
-//                default:
-//                    JOptionPane.showMessageDialog(null, "\nOpcion de disco Incorrecta. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
-//                    break;
-//            }
-//
-//            this.setVisible(false);
-//            frame.setVisible(true);
-//        } catch (IOException ex) {
-//            JOptionPane.showMessageDialog(null, "\nError al guardar el archivo. ", "ADVERTENCIA!!!", JOptionPane.ERROR_MESSAGE);
-//            System.out.println("en guardar el archivo");
-//        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed

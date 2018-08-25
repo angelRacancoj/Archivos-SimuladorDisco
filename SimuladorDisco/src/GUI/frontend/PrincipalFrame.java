@@ -12,6 +12,7 @@ import GUI.frontend.pantallas.CrearArchivoFrame;
 import GUI.frontend.pantallas.EliminarArchivoFrame;
 import GUI.frontend.pantallas.ModificarArchivoFrame;
 import GUI.frontend.pantallas.ReportesFrame;
+import GUI.frontend.pantallas.ReportesFrame1;
 import GUI.frontend.pantallas.ReportesParticion3Frame;
 import Handlers.Indexed_Handler;
 import asignacionContigua.manejadorAsignacionContigua;
@@ -117,6 +118,7 @@ public class PrincipalFrame extends javax.swing.JFrame {
         jMenuItem23 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Pantalla Principal");
 
         mbrButton.setBackground(new java.awt.Color(255, 153, 153));
         mbrButton.setText("MBR");
@@ -520,7 +522,7 @@ public class PrincipalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_modificarP1MenuItemActionPerformed
 
     private void reporteBloquesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteBloquesMenuItemActionPerformed
-        ReportesFrame reportesFrame = new ReportesFrame(this, "ACA TENDRIA QUE IR EL STRING DEL REPORTE");
+        ReportesFrame reportesFrame = new ReportesFrame(this, linkedP.getReporte2(1000));
         reportesFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_reporteBloquesMenuItemActionPerformed
@@ -604,19 +606,19 @@ public class PrincipalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_modificarP3MenuItemActionPerformed
 
     private void consultarP1MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarP1MenuItemActionPerformed
-        ConsultarArchivoFrame consultarArchivoFrame = new ConsultarArchivoFrame(this);
+        ConsultarArchivoFrame consultarArchivoFrame = new ConsultarArchivoFrame(this, constantSD.MEJOR_CONTIGUA);
         consultarArchivoFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_consultarP1MenuItemActionPerformed
 
     private void consultarP2MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarP2MenuItemActionPerformed
-        ConsultarArchivoFrame consultarArchivoFrame = new ConsultarArchivoFrame(this);
+        ConsultarArchivoFrame consultarArchivoFrame = new ConsultarArchivoFrame(this, constantSD.PARTICION_ENLAZADA);
         consultarArchivoFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_consultarP2MenuItemActionPerformed
 
     private void consultarP3MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarP3MenuItemActionPerformed
-        ConsultarArchivoFrame consultarArchivoFrame = new ConsultarArchivoFrame(this);
+        ConsultarArchivoFrame consultarArchivoFrame = new ConsultarArchivoFrame(this, constantSD.PARTICION_INDEXADA);
         consultarArchivoFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_consultarP3MenuItemActionPerformed
@@ -665,7 +667,7 @@ public class PrincipalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void reporteDirectorioMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteDirectorioMenuItemActionPerformed
-        ReportesFrame reportesFrame = new ReportesFrame(this, IndexP.directoryReport());
+        ReportesFrame1 reportesFrame = new ReportesFrame1(this, constantSD.PARTICION_ENLAZADA);
         reportesFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_reporteDirectorioMenuItemActionPerformed

@@ -21,10 +21,10 @@ public class manejadorAsignacionContigua {
     public manejadorAsignacionContigua() {
     }
 
-    public void crearParticion(String tamanioParticion, String tamanioBloque) {
-        this.tamanioBloques = Integer.parseInt(tamanioBloque);
-        int tamParticion = Integer.parseInt(tamanioParticion);
-        int tamBloque = Integer.parseInt(tamanioBloque);
+    public void crearParticion(int tamanioParticion, int tamanioBloque) {
+        this.tamanioBloques = tamanioBloque;
+        int tamParticion = tamanioParticion;
+        int tamBloque = tamanioBloque;
         contigua = new asignacionContigua(tamParticion, tamBloque);
 
     }
